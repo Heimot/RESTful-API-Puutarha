@@ -9,6 +9,8 @@ const Product = require('../models/product');
 router.get('/', (req, res, next) => {
     Order.find()
         .select('product quantity _id')
+        .populate('product', 'name')
+        // To only fetch one thing from the product like name -> .populate('product', 'name') <-
         .exec()
         .then(docs => {
             res.status(200).json({
@@ -74,6 +76,7 @@ router.post('/', (req, res, next) => {
 
 router.get('/:orderId', (req, res, next) => {
     Order.findById(req.params.orderId)
+        .populate('product')
         .exec()
         .then(order => {
             if (!order) {
@@ -105,7 +108,7 @@ router.delete('/:orderId', (req, res, next) => {
                 request: {
                     type: 'POST',
                     url: 'http:localhost:3000/orders/',
-                    body: {productId: 'ID', quantity: 'Number'}
+                    body: { productId: 'ID', quantity: 'Number' }
                 }
             });
         })
