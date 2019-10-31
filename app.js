@@ -16,6 +16,7 @@ mongoose.connect('mongodb+srv://Heimot:'+ process.env.MONGOPW +'@node-rest-api-8
 mongoose.Promise = global.Promise;
 
 app.use(morgan('dev'));
+app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
