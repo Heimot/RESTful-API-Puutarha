@@ -5,8 +5,7 @@ const Product = require('../models/product');
 
 exports.orders_get_all = (req, res, next) => {
     Order.find()
-        .select('product quantity _id')
-        .populate('product', 'name')
+        .populate('product')
         // To only fetch one thing from the product like name -> .populate('product', 'name') <-
         .exec()
         .then(docs => {
@@ -15,8 +14,8 @@ exports.orders_get_all = (req, res, next) => {
                 orders: docs.map(doc => {
                     return {
                         _id: doc._id,
+                        name: doc.name,
                         product: doc.product,
-                        quantity: doc.quantity,
                         request: {
                             type: 'GET',
                             url: 'http://localhost:3000/orders/' + doc._id
@@ -42,7 +41,7 @@ exports.orders_create_order =  (req, res, next) => {
             }
             const order = new Order({
                 _id: mongoose.Types.ObjectId(),
-                quantity: req.body.quantity,
+                name: req.body.name,
                 product: req.body.productId
             });
             return order
@@ -54,8 +53,8 @@ exports.orders_create_order =  (req, res, next) => {
                 message: 'Order stored',
                 createdOrder: {
                     id_: result._id,
+                    name: result.name,
                     product: result.product,
-                    quantity: result.quantity
                 },
                 request: {
                     type: 'GET',
@@ -90,6 +89,32 @@ exports.orders_get_order = (req, res, next) => {
             });
         })
         .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+}
+
+exports.orders_update_order = (req, res, next) => {
+    const id = req.params.orderId;
+    const updateOps = {};
+    for (const ops of req.body) {
+        updateOps[ops.propName] = ops.value;
+    }
+    Product.update({ _id: id }, { $set: updateOps })
+        .exec()
+        .then(result => {
+            console.log(result);
+            res.status(200).json({
+                message: 'Product updated',
+                request: {
+                    type: 'GET',
+                    url: 'http://localhost:3000/orders/' + id
+                }
+            });
+        })
+        .catch(err => {
+            console.log(err);
             res.status(500).json({
                 error: err
             });

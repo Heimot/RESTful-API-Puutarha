@@ -3,24 +3,9 @@ const Product = require('../models/product');
 
 exports.products_get_all = (req, res, next) => {
     Product.find()
-        .select('name price _id')
         .exec()
         .then(docs => {
-            const response = {
-                count: docs.length,
-                products: docs.map(doc => {
-                    return {
-                        name: doc.name,
-                        price: doc.price,
-                        _id: doc._id,
-                        request: {
-                            type: 'GET',
-                            url: 'http://localhost:3000/products/' + doc._id
-                        }
-                    }
-                })
-            }
-            res.status(200).json(response);
+            res.status(200).json(docs);
         })
         .catch(err => {
             console.log(err);
@@ -32,9 +17,34 @@ exports.products_get_all = (req, res, next) => {
 
 exports.products_create_product = (req, res, next) => {
     const product = new Product({
-        _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        price: req.body.price
+        kauppa: req.body.kauppa,
+        kukka: {
+            kukka1: {
+                name: req.body.kukka.kukka1.name,
+                toimi: req.body.kukka.kukka1.toimi,
+                kerays: req.body.kukka.kukka1.kerays
+            },
+            kukka2: {
+                name: req.body.kukka.kukka2.name,
+                toimi: req.body.kukka.kukka2.toimi,
+                kerays: req.body.kukka.kukka2.kerays
+            },
+            kukka3: {
+                name: req.body.kukka.kukka3.name,
+                toimi: req.body.kukka.kukka3.toimi,
+                kerays: req.body.kukka.kukka3.kerays
+            },
+            kukka4: {
+                name: req.body.kukka.kukka4.name,
+                toimi: req.body.kukka.kukka4.toimi,
+                kerays: req.body.kukka.kukka4.kerays
+            },
+            kukka5: {
+                name: req.body.kukka.kukka5.name,
+                toimi: req.body.kukka.kukka5.toimi,
+                kerays: req.body.kukka.kukka5.kerays
+            },
+        },
     });
     product
         .save()
@@ -43,8 +53,34 @@ exports.products_create_product = (req, res, next) => {
             res.status(201).json({
                 message: 'Created product successfully',
                 createdProduct: {
-                    name: result.name,
-                    price: result.price,
+                    kauppa: result.kauppa,
+                    kukka: {
+                        kukka1: {
+                            name: result.kukka.kukka1.name,
+                            toimi: result.kukka.kukka1.toimi,
+                            kerays: result.kukka.kukka1.kerays,
+                        },
+                        kukka2: {
+                            name: result.kukka.kukka2.name,
+                            toimi: result.kukka.kukka2.toimi,
+                            kerays: result.kukka.kukka2.kerays,
+                        },
+                        kukka3: {
+                            name: result.kukka.kukka3.name,
+                            toimi: result.kukka.kukka3.toimi,
+                            kerays: result.kukka.kukka3.kerays,
+                        },
+                        kukka4: {
+                            name: result.kukka.kukka4.name,
+                            toimi: result.kukka.kukka4.toimi,
+                            kerays: result.kukka.kukka4.kerays,
+                        },
+                        kukka5: {
+                            name: result.kukka.kukka5.name,
+                            toimi: result.kukka.kukka5.toimi,
+                            kerays: result.kukka.kukka5.kerays,
+                        },
+                    },
                     _id: result._id,
                     request: {
                         type: 'GET',
@@ -123,8 +159,7 @@ exports.products_delete_product = (req, res, next) => {
                 message: 'Product deleted',
                 request: {
                     type: 'POST',
-                    url: 'http://localhost:3000/products',
-                    body: {name: 'String', price: 'Number'}
+                    url: 'http://localhost:3000/products'
                 }
             });
         })
