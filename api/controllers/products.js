@@ -1,15 +1,6 @@
 const mongoose = require('mongoose');
 const Product = require('../models/product');
 
-const users = [
-    { id: 1, name: 'user 1', loggedin: true},
-    { id: 2, name: 'user 2', loggedin: true},
-    { id: 2, name: 'user 22', loggedin: true},
-    { id: 3, name: 'user 1', loggedin: true},
-    { id: 4, name: 'user 1' ,loggedin: true},
-    { id: 5, name: 'user 1', loggedin: false},
-]
-
 exports.products_get_all = (req, res, next) => {
     Product.find()
         .exec()
@@ -26,20 +17,42 @@ exports.products_get_all = (req, res, next) => {
 
 exports.products_get_date = (req, res, next) => {
     const date = req.query.date;
+    const valmis = parseInt(req.query.valmis);
     Product.find()
-    .exec()
-    .then(docs => {
-        const result = docs.filter(function(docs) {
-            return docs.date === date;
-           });
-           res.status(200).json(result);
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({
-            error: err
+        .exec()
+        .then(docs => {
+            if (date) {
+                const result = docs.filter(function (docs) {
+                    return docs.date === date;
+                });
+
+                if (valmis) {
+                    const result2 = result.filter(function (results) {
+                        return results.valmis === valmis;
+                    });
+                    res.status(200).json(result2);
+
+                } else {
+                    res.status(200).json(result);
+                }
+
+            } else {
+                if (valmis) {
+                    const result2 = docs.filter(function (docs) {
+                        return docs.valmis === valmis;
+                    });
+                    res.status(200).json(result2);
+                } else {
+                    res.status(200).json(docs);
+                }
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
         });
-    });
 }
 
 exports.products_create_product = (req, res, next) => {
@@ -102,7 +115,7 @@ exports.products_create_product = (req, res, next) => {
                     kauppa: result.kauppa,
                     alisatieto: result.alisatieto,
                     date: result.date,
-                    toimituspvm : result.toimituspvm,
+                    toimituspvm: result.toimituspvm,
                     valmis: result.valmis,
                     kukka: {
                         kukka1: {
