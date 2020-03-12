@@ -109,7 +109,7 @@ exports.orders_create_order = (req, res, next) => {
 
 exports.orders_get_order = (req, res, next) => {
     Order.findById(req.params.orderId)
-        .populate('product')
+        .populate('products')
         .exec()
         .then(order => {
             if (!order) {
@@ -117,13 +117,7 @@ exports.orders_get_order = (req, res, next) => {
                     message: 'Order not found'
                 });
             }
-            res.status(200).json({
-                order: order,
-                request: {
-                    type: 'GET',
-                    url: 'http:localhost:3000/orders/'
-                }
-            });
+            res.status(200).json(order);
         })
         .catch(err => {
             res.status(500).json({
