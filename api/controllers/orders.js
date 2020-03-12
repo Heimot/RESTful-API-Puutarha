@@ -5,25 +5,13 @@ const Product = require('../models/product');
 
 exports.orders_get_all = (req, res, next) => {
     Order.find()
-        .populate('product')
+       
         // To only fetch one thing from the product like name -> .populate('product', 'name') <-
         .exec()
         .then(docs => {
-            res.status(200).json({
-                count: docs.length,
-                orders: docs.map(doc => {
-                    return {
-                        _id: doc._id,
-                        name: doc.name,
-                        product: doc.product,
-                        request: {
-                            type: 'GET',
-                            url: 'http://localhost:3000/orders/' + doc._id
-                        }
-                    }
-                })
-            });
+            res.status(200).json(docs);
         })
+
         .catch(err => {
             res.status(500).json({
                 error: err
@@ -31,8 +19,49 @@ exports.orders_get_all = (req, res, next) => {
         });
 }
 
-exports.orders_create_order =  (req, res, next) => {
-    Product.findById(req.body.productId)
+exports.orders_get_date = (req, res, next) => {
+    const date = req.query.date;
+    const valmis = parseInt(req.query.valmis);
+    Order.find()
+        .populate('products')
+        .exec()
+        .then(docs => {
+            if (date) {
+                const result = docs.filter(function (docs) {
+                    return docs.date === date;
+                });
+
+                if (valmis) {
+                    const result2 = result.filter(function (results) {
+                        return results.valmis === valmis;
+                    });
+                    res.status(200).json(result2);
+
+                } else {
+                    res.status(200).json(result);
+                }
+
+            } else {
+                if (valmis) {
+                    const result2 = docs.filter(function (docs) {
+                        return docs.valmis === valmis;
+                    });
+                    res.status(200).json(result2);
+                } else {
+                    res.status(200).json(docs);
+                }
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+}
+
+exports.orders_create_order = (req, res, next) => {
+    Product.find()
         .then(product => {
             if (!product) {
                 return res.status(404).json({
@@ -41,8 +70,12 @@ exports.orders_create_order =  (req, res, next) => {
             }
             const order = new Order({
                 _id: mongoose.Types.ObjectId(),
-                name: req.body.name,
-                product: req.body.productId
+                kauppa: req.body.kauppa,
+                alisatieto: req.body.alisatieto,
+                date: req.body.date,
+                toimituspvm: req.body.toimituspvm,
+                valmis: req.body.valmis,
+                products: req.body.products
             });
             return order
                 .save()
@@ -53,8 +86,12 @@ exports.orders_create_order =  (req, res, next) => {
                 message: 'Order stored',
                 createdOrder: {
                     id_: result._id,
-                    name: result.name,
-                    product: result.product,
+                    kauppa: result.kauppa,
+                    alisatieto: result.alisatieto,
+                    date: result.date,
+                    toimituspvm: result.toimituspvm,
+                    valmis: result.valmis,
+                    products: result.products
                 },
                 request: {
                     type: 'GET',
@@ -97,16 +134,12 @@ exports.orders_get_order = (req, res, next) => {
 
 exports.orders_update_order = (req, res, next) => {
     const id = req.params.orderId;
-    const updateOps = {};
-    for (const ops of req.body) {
-        updateOps[ops.propName] = ops.value;
-    }
-    Product.update({ _id: id }, { $set: updateOps })
+    Order.updateOne({ _id: id }, req.body, { new: true })
         .exec()
         .then(result => {
-            console.log(result);
             res.status(200).json({
-                message: 'Product updated',
+                message: 'Order updated',
+                result: result,
                 request: {
                     type: 'GET',
                     url: 'http://localhost:3000/orders/' + id

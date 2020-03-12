@@ -57,108 +57,26 @@ exports.products_get_date = (req, res, next) => {
 
 exports.products_create_product = (req, res, next) => {
     const product = new Product({
-        kauppa: req.body.kauppa,
-        alisatieto: req.body.alisatieto,
-        date: req.body.date,
-        toimituspvm: req.body.toimituspvm,
-        valmis: req.body.valmis,
-        kukka: {
-            kukka1: {
-                name: req.body.kukka.kukka1.name,
-                toimi: req.body.kukka.kukka1.toimi,
-                kerays: req.body.kukka.kukka1.kerays,
-                keratty: req.body.kukka.kukka1.keratty,
-                kerattymaara: req.body.kukka.kukka1.kerattymaara,
-                lisatieto: req.body.kukka.kukka1.lisatieto
-            },
-            kukka2: {
-                name: req.body.kukka.kukka2.name,
-                toimi: req.body.kukka.kukka2.toimi,
-                kerays: req.body.kukka.kukka2.kerays,
-                keratty: req.body.kukka.kukka2.keratty,
-                kerattymaara: req.body.kukka.kukka2.kerattymaara,
-                lisatieto: req.body.kukka.kukka2.lisatieto
-            },
-            kukka3: {
-                name: req.body.kukka.kukka3.name,
-                toimi: req.body.kukka.kukka3.toimi,
-                kerays: req.body.kukka.kukka3.kerays,
-                keratty: req.body.kukka.kukka3.keratty,
-                kerattymaara: req.body.kukka.kukka3.kerattymaara,
-                lisatieto: req.body.kukka.kukka3.lisatieto
-            },
-            kukka4: {
-                name: req.body.kukka.kukka4.name,
-                toimi: req.body.kukka.kukka4.toimi,
-                kerays: req.body.kukka.kukka4.kerays,
-                keratty: req.body.kukka.kukka4.keratty,
-                kerattymaara: req.body.kukka.kukka4.kerattymaara,
-                lisatieto: req.body.kukka.kukka4.lisatieto
-            },
-            kukka5: {
-                name: req.body.kukka.kukka5.name,
-                toimi: req.body.kukka.kukka5.toimi,
-                kerays: req.body.kukka.kukka5.kerays,
-                keratty: req.body.kukka.kukka5.keratty,
-                kerattymaara: req.body.kukka.kukka5.kerattymaara,
-                lisatieto: req.body.kukka.kukka5.lisatieto
-            },
-        },
+        kukka: req.body.kukka, 
+        toimi: req.body.toimi,
+        kerays: req.body.kerays,
+        keratty: req.body.keratty,
+        kerattymaara: req.body.kerattymaara,
+        lisatieto: req.body.lisatieto
     });
     product
         .save()
         .then(result => {
-            console.log(result);
+            
             res.status(201).json({
                 message: 'Created product successfully',
                 createdProduct: {
-                    kauppa: result.kauppa,
-                    alisatieto: result.alisatieto,
-                    date: result.date,
-                    toimituspvm: result.toimituspvm,
-                    valmis: result.valmis,
-                    kukka: {
-                        kukka1: {
-                            name: result.kukka.kukka1.name,
-                            toimi: result.kukka.kukka1.toimi,
-                            kerays: result.kukka.kukka1.kerays,
-                            keratty: result.kukka.kukka1.keratty,
-                            kerattymaara: result.kukka.kukka1.kerattymaara,
-                            lisatieto: result.kukka.kukka1.lisatieto
-                        },
-                        kukka2: {
-                            name: result.kukka.kukka2.name,
-                            toimi: result.kukka.kukka2.toimi,
-                            kerays: result.kukka.kukka2.kerays,
-                            keratty: result.kukka.kukka2.keratty,
-                            kerattymaara: result.kukka.kukka2.kerattymaara,
-                            lisatieto: result.kukka.kukka2.lisatieto
-                        },
-                        kukka3: {
-                            name: result.kukka.kukka3.name,
-                            toimi: result.kukka.kukka3.toimi,
-                            kerays: result.kukka.kukka3.kerays,
-                            keratty: result.kukka.kukka3.keratty,
-                            kerattymaara: result.kukka.kukka3.kerattymaara,
-                            lisatieto: result.kukka.kukka3.lisatieto
-                        },
-                        kukka4: {
-                            name: result.kukka.kukka4.name,
-                            toimi: result.kukka.kukka4.toimi,
-                            kerays: result.kukka.kukka4.kerays,
-                            keratty: result.kukka.kukka4.keratty,
-                            kerattymaara: result.kukka.kukka4.kerattymaara,
-                            lisatieto: result.kukka.kukka4.lisatieto
-                        },
-                        kukka5: {
-                            name: result.kukka.kukka5.name,
-                            toimi: result.kukka.kukka5.toimi,
-                            kerays: result.kukka.kukka5.kerays,
-                            keratty: result.kukka.kukka5.keratty,
-                            kerattymaara: result.kukka.kukka5.kerattymaara,
-                            lisatieto: result.kukka.kukka5.lisatieto
-                        },
-                    },
+                    kukka: result.kukka, 
+                    toimi: result.toimi,
+                    kerays: result.kerays,
+                    keratty: result.keratty,
+                    kerattymaara: result.kerattymaara,
+                    lisatieto: result.lisatieto,
                     _id: result._id,
                     request: {
                         type: 'GET',
@@ -207,7 +125,6 @@ exports.products_update_product = (req, res, next) => {
     Product.updateOne({ _id: id }, req.body, { new: true })
         .exec()
         .then(result => {
-            console.log(result);
             res.status(200).json({
                 message: 'Product updated',
                 request: {
@@ -233,7 +150,7 @@ exports.products_update_product_patch = (req, res, next) => {
     Product.update({ _id: id }, { $set: updateOps })
         .exec()
         .then(result => {
-            console.log(result);
+
             res.status(200).json({
                 message: 'Product updated',
                 request: {
@@ -269,4 +186,29 @@ exports.products_delete_product = (req, res, next) => {
                 error: err
             });
         });
+}
+
+exports.products_delete_multiple_products = (req, res, next, _id) => {
+
+    Product.deleteMany(
+        {
+            _id: { $in: (_id).map()}
+    }
+    )
+    .exec()
+    .then(result => {
+        res.status(200).json({
+            message: 'Products deleted',
+            request: {
+                type: 'POST',
+                url: 'http://localhost:3000/products'
+            }
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
 }
