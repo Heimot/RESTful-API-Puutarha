@@ -5,7 +5,7 @@ const Product = require('../models/product');
 
 exports.orders_get_all = (req, res, next) => {
     Order.find()
-       
+
         // To only fetch one thing from the product like name -> .populate('product', 'name') <-
         .exec()
         .then(docs => {
@@ -22,6 +22,7 @@ exports.orders_get_all = (req, res, next) => {
 exports.orders_get_date = (req, res, next) => {
     const date = req.query.date;
     const valmis = parseInt(req.query.valmis);
+    const kerays = decodeURIComponent(req.query.kerays);
     Order.find()
         .populate('products')
         .exec()
@@ -35,20 +36,75 @@ exports.orders_get_date = (req, res, next) => {
                     const result2 = result.filter(function (results) {
                         return results.valmis === valmis;
                     });
-                    res.status(200).json(result2);
+                    res.status(200).json({
+                        product: result2.map(doc => {
+                            return {
+                                _id: doc._id,
+                                date: doc.date,
+                                kauppa: doc.kauppa,
+                                alisatieto: doc.alisatieto,
+                                toimituspvm: doc.toimituspvm,
+                                valmis: doc.valmis,
+                                products: doc.products.filter(function (docs) {
+                                    return docs.kerays === kerays;
+                                })
+                            }
+                        })
+                    });
 
                 } else {
-                    res.status(200).json(result);
+                    res.status(200).json({
+                        product: result.map(doc => {
+                            return {
+                                _id: doc._id,
+                                date: doc.date,
+                                kauppa: doc.kauppa,
+                                alisatieto: doc.alisatieto,
+                                toimituspvm: doc.toimituspvm,
+                                valmis: doc.valmis,
+                                products: doc.products.filter(function (docs) {
+                                    return docs.kerays === kerays;
+                                })
+                            }
+                        })
+                    });
                 }
-
             } else {
                 if (valmis) {
                     const result2 = docs.filter(function (docs) {
                         return docs.valmis === valmis;
                     });
-                    res.status(200).json(result2);
+                    res.status(200).json({
+                        product: result2.map(doc => {
+                            return {
+                                _id: doc._id,
+                                date: doc.date,
+                                kauppa: doc.kauppa,
+                                alisatieto: doc.alisatieto,
+                                toimituspvm: doc.toimituspvm,
+                                valmis: doc.valmis,
+                                products: doc.products.filter(function (docs) {
+                                    return docs.kerays === kerays;
+                                })
+                            }
+                        })
+                    });
                 } else {
-                    res.status(200).json(docs);
+                    res.status(200).json({
+                        product: docs.map(doc => {
+                            return {
+                                _id: doc._id,
+                                date: doc.date,
+                                kauppa: doc.kauppa,
+                                alisatieto: doc.alisatieto,
+                                toimituspvm: doc.toimituspvm,
+                                valmis: doc.valmis,
+                                products: doc.products.filter(function (docs) {
+                                    return docs.kerays === kerays;
+                                })
+                            }
+                        })
+                    });
                 }
             }
         })
