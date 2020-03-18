@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
                 return url === req.originalUrl.split("?")[0];
 
             } else if (req.originalUrl.includes("/id/")) {
-
+                
                 return url === req.originalUrl.substring(0, req.originalUrl.indexOf("/id/")) + "/id/";
 
             } else {

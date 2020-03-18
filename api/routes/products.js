@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const checkAuth = require('../middleware/check-auth');
 const ProductsController = require('../controllers/products');
-const roleAuth = require('../middleware/check-role');
 
 router.get('/', checkAuth, ProductsController.products_get_all);
 
