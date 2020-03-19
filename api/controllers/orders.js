@@ -21,7 +21,7 @@ exports.orders_get_all = (req, res, next) => {
 
 exports.orders_get_date = (req, res, next) => {
     const date = req.query.date;
-    const valmis = parseInt(req.query.valmis);
+    const valmis = req.query.valmis;
     const kerays = decodeURIComponent(req.query.kerays);
     Order.find()
         .populate('products')
@@ -31,64 +31,130 @@ exports.orders_get_date = (req, res, next) => {
                 const result = docs.filter(function (docs) {
                     return docs.date === date;
                 });
-
                 if (valmis) {
-                    const result2 = result.filter(function (results) {
-                        return results.valmis === valmis;
-                    });
-                    res.status(200).json({
-                        product: result2.map(doc => {
-                            return {
-                                _id: doc._id,
-                                date: doc.date,
-                                kauppa: doc.kauppa,
-                                alisatieto: doc.alisatieto,
-                                toimituspvm: doc.toimituspvm,
-                                valmis: doc.valmis,
-                                products: doc.products.filter(function (docs) {
-                                    return docs.kerays === kerays;
-                                })
-                            }
-                        })
-                    });
+                    const result2 = result.map(doc => {
+                        return {
+                            _id: doc._id,
+                            date: doc.date,
+                            kauppa: doc.kauppa,
+                            alisatieto: doc.alisatieto,
+                            toimituspvm: doc.toimituspvm,
+                            products: doc.products.filter(function (docs) {
+                                return docs.valmis === valmis;
+                            })
+                        }
+                    })
+                    if (kerays === "") {
+                        res.status(200).json({
+                            product: result2.map(doc => {
+                                return {
+                                    _id: doc._id,
+                                    date: doc.date,
+                                    kauppa: doc.kauppa,
+                                    alisatieto: doc.alisatieto,
+                                    toimituspvm: doc.toimituspvm,
+                                    valmis: doc.valmis,
+                                    products: doc.products
+                                }
+                            })
+                        });
+                    } else {
+                        res.status(200).json({
+                            product: result2.map(doc => {
+                                return {
+                                    _id: doc._id,
+                                    date: doc.date,
+                                    kauppa: doc.kauppa,
+                                    alisatieto: doc.alisatieto,
+                                    toimituspvm: doc.toimituspvm,
+                                    valmis: doc.valmis,
+                                    products: doc.products.filter(function (docs) {
+                                        return docs.kerays === kerays;
+                                    })
+                                }
+                            })
+                        });
+                    }
 
                 } else {
-                    res.status(200).json({
-                        product: result.map(doc => {
-                            return {
-                                _id: doc._id,
-                                date: doc.date,
-                                kauppa: doc.kauppa,
-                                alisatieto: doc.alisatieto,
-                                toimituspvm: doc.toimituspvm,
-                                valmis: doc.valmis,
-                                products: doc.products.filter(function (docs) {
-                                    return docs.kerays === kerays;
-                                })
-                            }
-                        })
-                    });
+
+                    if (kerays === "") {
+                        res.status(200).json({
+                            product: result.map(doc => {
+                                return {
+                                    _id: doc._id,
+                                    date: doc.date,
+                                    kauppa: doc.kauppa,
+                                    alisatieto: doc.alisatieto,
+                                    toimituspvm: doc.toimituspvm,
+                                    valmis: doc.valmis,
+                                    products: doc.products
+                                }
+                            })
+                        });
+                    } else {
+                        res.status(200).json({
+                            product: result.map(doc => {
+                                return {
+                                    _id: doc._id,
+                                    date: doc.date,
+                                    kauppa: doc.kauppa,
+                                    alisatieto: doc.alisatieto,
+                                    toimituspvm: doc.toimituspvm,
+                                    valmis: doc.valmis,
+                                    products: doc.products.filter(function (docs) {
+                                        return docs.kerays === kerays;
+                                    })
+                                }
+                            })
+                        });
+                    }
                 }
             } else {
                 if (valmis) {
-                    const result2 = docs.filter(function (docs) {
-                        return docs.valmis === valmis;
-                    });
-                    res.status(200).json({
-                        product: result2.map(doc => {
-                            return {
-                                _id: doc._id,
-                                date: doc.date,
-                                kauppa: doc.kauppa,
-                                alisatieto: doc.alisatieto,
-                                toimituspvm: doc.toimituspvm,
-                                valmis: doc.valmis,
-                                products: doc.products.filter(function (docs) {
-                                    return docs.kerays === kerays;
-                                })
-                            }
-                        })
-                    });
+                    const result2 = docs.map(doc => {
+                        return {
+                            _id: doc._id,
+                            date: doc.date,
+                            kauppa: doc.kauppa,
+                            alisatieto: doc.alisatieto,
+                            toimituspvm: doc.toimituspvm,
+                            products: doc.products.filter(function (docs) {
+                                return docs.valmis === valmis;
+                            })
+                        }
+                    })
+                    if (kerays === "") {
+                        res.status(200).json({
+                            product: result2.map(doc => {
+                                return {
+                                    _id: doc._id,
+                                    date: doc.date,
+                                    kauppa: doc.kauppa,
+                                    alisatieto: doc.alisatieto,
+                                    toimituspvm: doc.toimituspvm,
+                                    valmis: doc.valmis,
+                                    products: doc.products
+                                }
+                            })
+                        });
+                    } else {
+                        res.status(200).json({
+                            product: result2.map(doc => {
+                                return {
+                                    _id: doc._id,
+                                    date: doc.date,
+                                    kauppa: doc.kauppa,
+                                    alisatieto: doc.alisatieto,
+                                    toimituspvm: doc.toimituspvm,
+                                    valmis: doc.valmis,
+                                    products: doc.products.filter(function (docs) {
+                                        return docs.kerays === kerays;
+                                    })
+                                }
+                            })
+                        });
+                    }
                 } else {
                     res.status(200).json({
                         product: docs.map(doc => {
@@ -194,6 +260,28 @@ exports.orders_update_order = (req, res, next) => {
                     type: 'GET',
                     url: 'http://localhost:3000/orders/' + id
                 }
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+}
+
+exports.orders_update_order_patch = (req, res, next) => {
+    const id = req.params.orderId;
+    const updateOps = {};
+    for (const ops of req.body) {
+        updateOps[ops.propName] = ops.value;
+    }
+    Order.update({ _id: id }, { $set: updateOps })
+        .exec()
+        .then(result => {
+
+            res.status(200).json({
+                message: 'Order updated',
             });
         })
         .catch(err => {

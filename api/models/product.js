@@ -7,6 +7,7 @@ const productSchema = mongoose.Schema({
     keratty: { type: String, required: false, default: "Odottaa keräystä" },
     kerattymaara: { type: Number, required: false, default: 0 },
     lisatieto: { type: String, required: false, default: "" },
+    valmis: { type: String, required: true, default: "Ei"}
 });
 
 module.exports = mongoose.model('Product', productSchema);

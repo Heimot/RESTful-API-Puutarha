@@ -15,6 +15,8 @@ router.get('/get/id/:orderId', checkAuth, ordersController.orders_get_order);
 
 router.put('/put/id/:orderId', checkAuth, ordersController.orders_update_order);
 
+router.patch('/patch/id/:orderId', checkAuth, ordersController.orders_update_order_patch);
+
 router.delete('/delete/id/:orderId', checkAuth, ordersController.orders_delete_order);
 
 module.exports = router;

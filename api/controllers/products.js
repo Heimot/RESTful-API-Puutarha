@@ -62,7 +62,8 @@ exports.products_create_product = (req, res, next) => {
         kerays: req.body.kerays,
         keratty: req.body.keratty,
         kerattymaara: req.body.kerattymaara,
-        lisatieto: req.body.lisatieto
+        lisatieto: req.body.lisatieto,
+        valmis: req.body.valmis
     });
     product
         .save()
@@ -77,6 +78,7 @@ exports.products_create_product = (req, res, next) => {
                     keratty: result.keratty,
                     kerattymaara: result.kerattymaara,
                     lisatieto: result.lisatieto,
+                    valmis: result.valmis,
                     _id: result._id,
                     request: {
                         type: 'GET',
