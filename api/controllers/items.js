@@ -17,8 +17,11 @@ exports.items_get_flowers = (req, res, next) => {
 
 exports.items_post_flowers = (req, res, next) => {
     const item = new Item({
+        _id: mongoose.Types.ObjectId(),
         flowers: req.body.flowers,
+        kaupat: req.body.kaupat
     });
+    
     item
         .save()
         .then(result => {
@@ -27,6 +30,7 @@ exports.items_post_flowers = (req, res, next) => {
                 message: 'Added flowers successfully',
                 createdProduct: {
                     flowers: result.flowers,
+                    kaupat: result.kaupat,
                     _id: result._id
                 }
             });
@@ -41,7 +45,6 @@ exports.items_post_flowers = (req, res, next) => {
 
 exports.items_delete_flowers = (req, res, next) => {
     const id = req.params.itemId;
-    console.log(id)
     Item.remove({ _id: id })
         .exec()
         .then(result => {
