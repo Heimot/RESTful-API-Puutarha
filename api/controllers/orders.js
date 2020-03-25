@@ -23,6 +23,9 @@ exports.orders_get_date = (req, res, next) => {
     const date = req.query.date;
     const valmis = req.query.valmis;
     const kerays = decodeURIComponent(req.query.kerays);
+    const kauppa = decodeURIComponent(req.query.kauppa);
+    const kukka = decodeURIComponent(req.query.kukka);
+
     Order.find()
         .populate('products')
         .exec()
@@ -32,6 +35,7 @@ exports.orders_get_date = (req, res, next) => {
                     return docs.date === date;
                 });
                 if (valmis) {
+
                     const result2 = result.map(doc => {
                         return {
                             _id: doc._id,
@@ -44,23 +48,97 @@ exports.orders_get_date = (req, res, next) => {
                             })
                         }
                     })
+
+
                     if (kerays === "") {
-                        res.status(200).json({
-                            product: result2.map(doc => {
-                                return {
-                                    _id: doc._id,
-                                    date: doc.date,
-                                    kauppa: doc.kauppa,
-                                    alisatieto: doc.alisatieto,
-                                    toimituspvm: doc.toimituspvm,
-                                    valmis: doc.valmis,
-                                    products: doc.products
+                        const result3 = result2.map(doc => {
+                            return {
+                                _id: doc._id,
+                                date: doc.date,
+                                kauppa: doc.kauppa,
+                                alisatieto: doc.alisatieto,
+                                toimituspvm: doc.toimituspvm,
+                                valmis: doc.valmis,
+                                products: doc.products
+                            }
+                        })
+                        if (kauppa === "") {
+                            const result4 = result3;
+                            if (kukka === "") {
+                                res.status(200).json({
+                                    product: result4.map(doc => {
+                                        return {
+                                            _id: doc._id,
+                                            date: doc.date,
+                                            kauppa: doc.kauppa,
+                                            alisatieto: doc.alisatieto,
+                                            toimituspvm: doc.toimituspvm,
+                                            valmis: doc.valmis,
+                                            products: doc.products
+                                        }
+                                    })
+                                })
+                            } else {
+                                if (kukka) {
+                                    res.status(200).json({
+                                        product: result4.map(doc => {
+                                            return {
+                                                _id: doc._id,
+                                                date: doc.date,
+                                                kauppa: doc.kauppa,
+                                                alisatieto: doc.alisatieto,
+                                                toimituspvm: doc.toimituspvm,
+                                                valmis: doc.valmis,
+                                                products: doc.products.filter(function (docs) {
+                                                    return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
+                                                })
+                                            }
+                                        })
+                                    })
                                 }
-                            })
-                        });
+                            }
+                        } else {
+                            if (kauppa) {
+                                const result4 = result3.filter(function (docs) {
+                                    return docs.kauppa.toLowerCase().includes(kauppa.toLowerCase());
+                                })
+                                if (kukka === "") {
+                                    res.status(200).json({
+                                        product: result4.map(doc => {
+                                            return {
+                                                _id: doc._id,
+                                                date: doc.date,
+                                                kauppa: doc.kauppa,
+                                                alisatieto: doc.alisatieto,
+                                                toimituspvm: doc.toimituspvm,
+                                                valmis: doc.valmis,
+                                                products: doc.products
+                                            }
+                                        })
+                                    })
+                                } else {
+                                    if (kukka) {
+                                        res.status(200).json({
+                                            product: result4.map(doc => {
+                                                return {
+                                                    _id: doc._id,
+                                                    date: doc.date,
+                                                    kauppa: doc.kauppa,
+                                                    alisatieto: doc.alisatieto,
+                                                    toimituspvm: doc.toimituspvm,
+                                                    valmis: doc.valmis,
+                                                    products: doc.products.filter(function (docs) {
+                                                        return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
+                                                    })
+                                                }
+                                            })
+                                        })
+                                    }
+                                }
+                            }
+                        }
                     } else {
-                        res.status(200).json({
-                            product: result2.map(doc => {
+                            result3 = result2.map(doc => {
                                 return {
                                     _id: doc._id,
                                     date: doc.date,
@@ -73,7 +151,81 @@ exports.orders_get_date = (req, res, next) => {
                                     })
                                 }
                             })
-                        });
+                            if (kauppa === "") {
+                                const result4 = result3;
+                                if (kukka === "") {
+                                    res.status(200).json({
+                                        product: result4.map(doc => {
+                                            return {
+                                                _id: doc._id,
+                                                date: doc.date,
+                                                kauppa: doc.kauppa,
+                                                alisatieto: doc.alisatieto,
+                                                toimituspvm: doc.toimituspvm,
+                                                valmis: doc.valmis,
+                                                products: doc.products
+                                            }
+                                        })
+                                    })
+                                } else {
+                                    if (kukka) {
+                                        res.status(200).json({
+                                            product: result4.map(doc => {
+                                                return {
+                                                    _id: doc._id,
+                                                    date: doc.date,
+                                                    kauppa: doc.kauppa,
+                                                    alisatieto: doc.alisatieto,
+                                                    toimituspvm: doc.toimituspvm,
+                                                    valmis: doc.valmis,
+                                                    products: doc.products.filter(function (docs) {
+                                                        return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
+                                                    })
+                                                }
+                                            })
+                                        })
+                                    }
+                                }
+                            } else {
+                                if (kauppa) {
+                                    const result4 = result3.filter(function (docs) {
+                                        return docs.kauppa.toLowerCase().includes(kauppa.toLowerCase());
+                                    })
+                                    if (kukka === "") {
+                                        res.status(200).json({
+                                            product: result4.map(doc => {
+                                                return {
+                                                    _id: doc._id,
+                                                    date: doc.date,
+                                                    kauppa: doc.kauppa,
+                                                    alisatieto: doc.alisatieto,
+                                                    toimituspvm: doc.toimituspvm,
+                                                    valmis: doc.valmis,
+                                                    products: doc.products
+                                                }
+                                            })
+                                        })
+                                    } else {
+                                        if (kukka) {
+                                            res.status(200).json({
+                                                product: result4.map(doc => {
+                                                    return {
+                                                        _id: doc._id,
+                                                        date: doc.date,
+                                                        kauppa: doc.kauppa,
+                                                        alisatieto: doc.alisatieto,
+                                                        toimituspvm: doc.toimituspvm,
+                                                        valmis: doc.valmis,
+                                                        products: doc.products.filter(function (docs) {
+                                                            return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
+                                                        })
+                                                    }
+                                                })
+                                            })
+                                        }
+                                    }
+                                }
+                            }
                     }
 
                 } else {
