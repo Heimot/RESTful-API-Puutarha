@@ -4,6 +4,21 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
+exports.user_get_users = (req, res, next) => {
+    User.find()
+        .select("_id email roles")
+        .exec()
+        .then(docs => {
+            res.status(200).json(docs);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+}
+
 exports.user_signup = (req, res, next) => {
     User.find({ email: req.body.email })
         .exec()
@@ -30,7 +45,6 @@ exports.user_signup = (req, res, next) => {
                             .then(result => {
                                 console.log(result);
                                 res.status(201).json({
-                                    data: result.roles,
                                     message: 'User created'
                                 });
                             })
@@ -104,4 +118,5 @@ exports.user_delete_user = (req, res, next) => {
                 error: err
             });
         });
+
 }
