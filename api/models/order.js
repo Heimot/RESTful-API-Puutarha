@@ -7,7 +7,8 @@ const orderSchema = mongoose.Schema({
     alisatieto: { type: String, required: false },
     date: { type: String, required: true },
     toimituspvm: { type: String, required: true },
-    valmis: { type: Number, required: true, default: 0 }, // default 0 means that it isnt ready yet and 1 means its ready and checked.
+    tuusjarvi: { type: String, required: true, default: "Ei"},
+    ryona: { type: String, required: true, default: "Ei"},
 
     products: [{type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: false}]
 });
