@@ -3,11 +3,18 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+var socket = require('socket.io');
+
+var server = app.listen(3002, function() {
+    console.log('listening to requests on port 3002');
+});
 
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
 const userRoutes = require('./api/routes/user');
 const itemRoutes = require('./api/routes/items');
+
+app.use(express.static('public'));
 
 mongoose.connect('mongodb+srv://Heimot:'+ process.env.MONGOPW +'@node-rest-api-8ybrw.mongodb.net/test?retryWrites=true&w=majority',
     {
@@ -16,6 +23,20 @@ mongoose.connect('mongodb+srv://Heimot:'+ process.env.MONGOPW +'@node-rest-api-8
     }
 );
 mongoose.Promise = global.Promise;
+
+///////////////////////////
+
+var io = socket(server);
+
+io.on('connection', function(socket) {
+    console.log("Connection made", socket.id);
+
+    socket.on('chat', function(data) {
+        io.sockets.emit('chat', data);
+    });
+});
+
+/////////////////////////
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
