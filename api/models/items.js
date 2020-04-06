@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const itemSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
+    _id: { type: String, required: true },
     flowers: [{ type: String, required: false }],
     kaupat: [{ type: String, required: false }],
 });

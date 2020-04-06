@@ -13,6 +13,7 @@ const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
 const userRoutes = require('./api/routes/user');
 const itemRoutes = require('./api/routes/items');
+const rullakkoRoutes = require('./api/routes/rullakot');
 
 app.use(express.static('public'));
 
@@ -29,10 +30,12 @@ mongoose.Promise = global.Promise;
 var io = socket(server);
 
 io.on('connection', function(socket) {
-    console.log("Connection made", socket.id);
 
     socket.on('chat', function(data) {
         io.sockets.emit('chat', data);
+    });
+    socket.on('idUpdate', function(data) {
+        io.sockets.emit('idUpdate', data);
     });
 });
 
@@ -57,6 +60,7 @@ app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
 app.use('/user', userRoutes);
 app.use('/items', itemRoutes);
+app.use('/rullakot', rullakkoRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
