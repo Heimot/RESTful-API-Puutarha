@@ -2,11 +2,10 @@ const mongoose = require('mongoose');
 
 const Order = require('../models/order');
 const Product = require('../models/product');
+const Rullakot = require('../models/rullakko');
 
 exports.orders_get_all = (req, res, next) => {
     Order.find()
-
-        // To only fetch one thing from the product like name -> .populate('product', 'name') <-
         .exec()
         .then(docs => {
             res.status(200).json(docs);
@@ -27,7 +26,7 @@ exports.orders_get_date = (req, res, next) => {
     const kukka = decodeURIComponent(req.query.kukka);
 
     Order.find()
-        .populate('products')
+        .populate('products rullakot')
         .exec()
         .then(docs => {
             if (date) {
@@ -47,7 +46,8 @@ exports.orders_get_date = (req, res, next) => {
                             ryona: doc.ryona,
                             products: doc.products.filter(function (docs) {
                                 return docs.valmis === valmis;
-                            })
+                            }),
+                            rullakot: doc.rullakot
                         }
                     })
 
@@ -62,7 +62,8 @@ exports.orders_get_date = (req, res, next) => {
                                 toimituspvm: doc.toimituspvm,
                                 tuusjarvi: doc.tuusjarvi,
                                 ryona: doc.ryona,
-                                products: doc.products
+                                products: doc.products,
+                                rullakot: doc.rullakot
                             }
                         })
                         if (kauppa === "") {
@@ -78,7 +79,8 @@ exports.orders_get_date = (req, res, next) => {
                                             toimituspvm: doc.toimituspvm,
                                             tuusjarvi: doc.tuusjarvi,
                                             ryona: doc.ryona,
-                                            products: doc.products
+                                            products: doc.products,
+                                            rullakot: doc.rullakot
                                         }
                                     })
                                 })
@@ -96,7 +98,8 @@ exports.orders_get_date = (req, res, next) => {
                                                 ryona: doc.ryona,
                                                 products: doc.products.filter(function (docs) {
                                                     return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
-                                                })
+                                                }),
+                                                rullakot: doc.rullakot
                                             }
                                         })
                                     })
@@ -118,7 +121,8 @@ exports.orders_get_date = (req, res, next) => {
                                                 toimituspvm: doc.toimituspvm,
                                                 tuusjarvi: doc.tuusjarvi,
                                                 ryona: doc.ryona,
-                                                products: doc.products
+                                                products: doc.products,
+                                                rullakot: doc.rullakot
                                             }
                                         })
                                     })
@@ -136,7 +140,8 @@ exports.orders_get_date = (req, res, next) => {
                                                     ryona: doc.ryona,
                                                     products: doc.products.filter(function (docs) {
                                                         return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
-                                                    })
+                                                    }),
+                                                    rullakot: doc.rullakot
                                                 }
                                             })
                                         })
@@ -156,7 +161,8 @@ exports.orders_get_date = (req, res, next) => {
                                     ryona: doc.ryona,
                                     products: doc.products.filter(function (docs) {
                                         return docs.kerays === kerays;
-                                    })
+                                    }),
+                                    rullakot: doc.rullakot
                                 }
                             })
                             if (kauppa === "") {
@@ -172,7 +178,8 @@ exports.orders_get_date = (req, res, next) => {
                                                 toimituspvm: doc.toimituspvm,
                                                 tuusjarvi: doc.tuusjarvi,
                                                 ryona: doc.ryona,
-                                                products: doc.products
+                                                products: doc.products,
+                                                rullakot: doc.rullakot
                                             }
                                         })
                                     })
@@ -190,7 +197,8 @@ exports.orders_get_date = (req, res, next) => {
                                                     ryona: doc.ryona,
                                                     products: doc.products.filter(function (docs) {
                                                         return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
-                                                    })
+                                                    }),
+                                                    rullakot: doc.rullakot
                                                 }
                                             })
                                         })
@@ -212,7 +220,8 @@ exports.orders_get_date = (req, res, next) => {
                                                     toimituspvm: doc.toimituspvm,
                                                     tuusjarvi: doc.tuusjarvi,
                                                     ryona: doc.ryona,
-                                                    products: doc.products
+                                                    products: doc.products,
+                                                    rullakot: doc.rullakot
                                                 }
                                             })
                                         })
@@ -230,7 +239,8 @@ exports.orders_get_date = (req, res, next) => {
                                                         ryona: doc.ryona,
                                                         products: doc.products.filter(function (docs) {
                                                             return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
-                                                        })
+                                                        }),
+                                                        rullakot: doc.rullakot
                                                     }
                                                 })
                                             })
@@ -253,7 +263,8 @@ exports.orders_get_date = (req, res, next) => {
                                     toimituspvm: doc.toimituspvm,
                                     tuusjarvi: doc.tuusjarvi,
                                     ryona: doc.ryona,
-                                    products: doc.products
+                                    products: doc.products,
+                                    rullakot: doc.rullakot
                                 }
                             })
                         });
@@ -270,7 +281,8 @@ exports.orders_get_date = (req, res, next) => {
                                     ryona: doc.ryona,
                                     products: doc.products.filter(function (docs) {
                                         return docs.kerays === kerays;
-                                    })
+                                    }),
+                                    rullakot: doc.rullakot
                                 }
                             })
                         });
@@ -289,7 +301,8 @@ exports.orders_get_date = (req, res, next) => {
                             ryona: doc.ryona,
                             products: doc.products.filter(function (docs) {
                                 return docs.valmis === valmis;
-                            })
+                            }),
+                            rullakot: doc.rullakot
                         }
                     })
                     if (kerays === "") {
@@ -303,7 +316,8 @@ exports.orders_get_date = (req, res, next) => {
                                     toimituspvm: doc.toimituspvm,
                                     tuusjarvi: doc.tuusjarvi,
                                     ryona: doc.ryona,
-                                    products: doc.products
+                                    products: doc.products,
+                                    rullakot: doc.rullakot
                                 }
                             })
                         });
@@ -320,7 +334,8 @@ exports.orders_get_date = (req, res, next) => {
                                     ryona: doc.ryona,
                                     products: doc.products.filter(function (docs) {
                                         return docs.kerays === kerays;
-                                    })
+                                    }),
+                                    rullakot: doc.rullakot
                                 }
                             })
                         });
@@ -338,7 +353,8 @@ exports.orders_get_date = (req, res, next) => {
                                 ryona: doc.ryona,
                                 products: doc.products.filter(function (docs) {
                                     return docs.kerays === kerays;
-                                })
+                                }),
+                                rullakot: doc.rullakot
                             }
                         })
                     });
@@ -369,7 +385,8 @@ exports.orders_create_order = (req, res, next) => {
                 toimituspvm: req.body.toimituspvm,
                 tuusjarvi: req.body.tuusjarvi,
                 ryona: req.body.ryona,
-                products: req.body.products
+                products: req.body.products,
+                rullakot: req.body.rullakot
             });
             return order
                 .save()
@@ -386,7 +403,8 @@ exports.orders_create_order = (req, res, next) => {
                     toimituspvm: result.toimituspvm,
                     tuusjarvi: result.tuusjarvi,
                     ryona: result.ryona,
-                    products: result.products
+                    products: result.products,
+                    rullakot: result.rullakot
                 },
                 request: {
                     type: 'GET',
@@ -404,7 +422,7 @@ exports.orders_create_order = (req, res, next) => {
 
 exports.orders_get_order = (req, res, next) => {
     Order.findById(req.params.orderId)
-        .populate('products')
+        .populate('products rullakot')
         .exec()
         .then(order => {
             if (!order) {
@@ -428,7 +446,6 @@ exports.orders_update_order = (req, res, next) => {
         .then(result => {
             res.status(200).json({
                 message: 'Order updated',
-                result: result,
                 request: {
                     type: 'GET',
                     url: 'http://localhost:3000/orders/' + id

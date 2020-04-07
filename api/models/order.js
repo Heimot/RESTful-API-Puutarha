@@ -10,7 +10,9 @@ const orderSchema = mongoose.Schema({
     tuusjarvi: { type: String, required: true, default: "Ei"},
     ryona: { type: String, required: true, default: "Ei"},
 
-    products: [{type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: false}]
+    products: [{type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: false}],
+    
+    rullakot: [{type: mongoose.Schema.Types.ObjectId, ref: 'Rullakot', required: false}]
 });
 
 module.exports = mongoose.model('Order', orderSchema);

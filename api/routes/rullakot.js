@@ -3,7 +3,7 @@ const router = express.Router();
 const checkAuth = require('../middleware/check-auth');
 const RullakotController = require('../controllers/rullakot');
 
-router.get('/rullakot', checkAuth, RullakotController.rullakko_get_all);
+router.get('/get', checkAuth, RullakotController.rullakko_get_all);
 
 router.post('/post', checkAuth,  RullakotController.rullakko_create_rullakot);
 

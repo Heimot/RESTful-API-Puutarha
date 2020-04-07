@@ -7,6 +7,7 @@ module.exports = {
         "/products/", "/products/post", "/products/patch/id/", "/products/put/id/", "/products/delete/id/", "/products/get/id/", "/products/tables",
         "/orders/", "/orders/tables", "/orders/post/", "/orders/get/id/", "/orders/put/id/", "/orders/delete/id/", "/orders/patch/id/",
         "/user/signup", "/user/delete/id/", "/user/get/users",
-        "/items/flowers", "/items/flowers/post", "/items/delete/id/", "/items/put/id/", "/items/get/id/", "/items/patch/id/"
+        "/items/flowers", "/items/flowers/post", "/items/delete/id/", "/items/put/id/", "/items/get/id/", "/items/patch/id/",
+        "/rullakot/get", "/rullakot/post", "/rullakot/get/id/", "/rullakot/put/id/", "/rullakot/patch/id/", "/rullakot/delete/id/"
     ]
 }
