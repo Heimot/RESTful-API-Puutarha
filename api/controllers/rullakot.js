@@ -20,6 +20,8 @@ exports.rullakko_create_rullakot = (req, res, next) => {
         rullakonNimi: req.body.rullakonNimi,
         rullakoidenMaara: req.body.rullakoidenMaara,
         hyllyjenMaara: req.body.hyllyjenMaara,
+        kaupanNimi: req.body.kaupanNimi,
+        id: req.body._id,
     });
     rullakko
         .save()
@@ -31,6 +33,8 @@ exports.rullakko_create_rullakot = (req, res, next) => {
                     rullakonNimi: result.rullakonNimi,
                     rullakoidenMaara: result.rullakoidenMaara,
                     hyllyjenMaara: result.hyllyjenMaara,
+                    kaupanNimi: result.kaupanNimi,
+                    id: result._id,
                     request: {
                         type: 'GET',
                         url: 'http://localhost:3000/products/' + result._id
