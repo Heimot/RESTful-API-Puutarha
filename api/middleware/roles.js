@@ -8,6 +8,8 @@ module.exports = {
         "/orders/", "/orders/tables", "/orders/post/", "/orders/get/id/", "/orders/put/id/", "/orders/delete/id/", "/orders/patch/id/",
         "/user/signup", "/user/delete/id/", "/user/get/users",
         "/items/flowers", "/items/flowers/post", "/items/delete/id/", "/items/put/id/", "/items/get/id/", "/items/patch/id/",
-        "/rullakot/get", "/rullakot/post", "/rullakot/get/id/", "/rullakot/put/id/", "/rullakot/patch/id/", "/rullakot/delete/id/"
+        "/rullakot/get", "/rullakot/post", "/rullakot/get/id/", "/rullakot/put/id/", "/rullakot/patch/id/", "/rullakot/delete/id/",
+        "/hyllyt/get", "/hyllyt/post", "/hyllyt/get/id/", "/hyllyt/put/id/", "/hyllyt/patch/id/", "/hyllyt/delete/id/",
+        "/palautetut/get", "/palautetut/post", "/palautetut/get/id/", "/palautetut/put/id/", "/palautetut/patch/id/", "/palautetut/delete/id/"
     ]
 }

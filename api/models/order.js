@@ -12,7 +12,8 @@ const orderSchema = mongoose.Schema({
 
     products: [{type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: false}],
     
-    rullakot: [{type: mongoose.Schema.Types.ObjectId, ref: 'Rullakot', required: false}]
+    rullakot: [{type: mongoose.Schema.Types.ObjectId, ref: 'Rullakot', required: false}],
+    hyllyt: [{type: mongoose.Schema.Types.ObjectId, ref: 'Hyllyt', required: false}]
 });
 
 module.exports = mongoose.model('Order', orderSchema);

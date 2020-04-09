@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const Rullakko = require('../models/rullakko');
+const Hylly = require('../models/hylly');
 
-exports.rullakko_get_all = (req, res, next) => {
-    Rullakko.find()
+exports.hylly_get_all = (req, res, next) => {
+    Hylly.find()
         .exec()
         .then(docs => {
             res.status(200).json(docs);
@@ -15,25 +15,25 @@ exports.rullakko_get_all = (req, res, next) => {
         });
 }
 
-exports.rullakko_create_rullakot = (req, res, next) => {
-    const rullakko = new Rullakko({
-        rullakonNimi: req.body.rullakonNimi,
-        rullakoidenMaara: req.body.rullakoidenMaara,
+exports.hylly_create_rullakot = (req, res, next) => {
+    const hylly = new Hylly({
+        hyllynNimi: req.body.hyllynNimi,
+        hyllyjenMaara: req.body.hyllyjenMaara,
         kaupanNimi: req.body.kaupanNimi,
-        palautetutRullakot: req.body.palautetutRullakot,
+        palautetutHyllyt: result.palautetutHyllyt,
         id: req.body._id,
     });
-    rullakko
+    hylly
         .save()
         .then(result => {
-            
+
             res.status(201).json({
                 message: 'Created product successfully',
-                createdRullakko: {
-                    rullakonNimi: result.rullakonNimi,
-                    rullakoidenMaara: result.rullakoidenMaara,
+                createdHylly: {
+                    hyllynNimi: result.hyllynNimi,
+                    hyllyjenMaara: result.hyllyjenMaara,
                     kaupanNimi: result.kaupanNimi,
-                    palautetutRullakot: result.palautetutRullakot,
+                    palautetutHyllyt: result.palautetutHyllyt,
                     id: result._id,
                     request: {
                         type: 'GET',
@@ -51,10 +51,9 @@ exports.rullakko_create_rullakot = (req, res, next) => {
 
 }
 
-exports.rullakko_get_by_id = (req, res, next) => {
-    const id = req.params.rullakkoId;
-    Rullakko.findById(id)
-        .select('name price _id')
+exports.hylly_get_by_id = (req, res, next) => {
+    const id = req.params.hyllyId;
+    Hylly.findById(id)
         .exec()
         .then(doc => {
             console.log("From database", doc);
@@ -77,13 +76,13 @@ exports.rullakko_get_by_id = (req, res, next) => {
         });
 }
 
-exports.rullakko_update_by_id = (req, res, next) => {
-    const id = req.params.rullakkoId;
-    Rullakko.updateOne({ _id: id }, req.body, { new: true })
+exports.hylly_update_by_id = (req, res, next) => {
+    const id = req.params.hyllyId;
+    Hylly.updateOne({ _id: id }, req.body, { new: true })
         .exec()
         .then(result => {
             res.status(200).json({
-                message: 'Rullakko updated',
+                message: 'Hylly updated',
                 request: {
                     type: 'GET',
                     url: 'http://localhost:3000/products/' + id
@@ -98,18 +97,18 @@ exports.rullakko_update_by_id = (req, res, next) => {
         });
 }
 
-exports.rullakko_patch_by_id = (req, res, next) => {
-    const id = req.params.rullakkoId;
+exports.hylly_patch_by_id = (req, res, next) => {
+    const id = req.params.hyllyId;
     const updateOps = {};
     for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
-    Rullakko.update({ _id: id }, { $set: updateOps })
+    Hylly.update({ _id: id }, { $set: updateOps })
         .exec()
         .then(result => {
 
             res.status(200).json({
-                message: 'Rullakko updated',
+                message: 'Hylly updated',
                 request: {
                     type: 'GET',
                     url: 'http://localhost:3000/products/' + id
@@ -124,13 +123,13 @@ exports.rullakko_patch_by_id = (req, res, next) => {
         });
 }
 
-exports.rullakko_delete_by_id = (req, res, next) => {
-    const id = req.params.rullakkoId;
-    Rullakko.remove({ _id: id })
+exports.hylly_delete_by_id = (req, res, next) => {
+    const id = req.params.hyllyId;
+    Hylly.remove({ _id: id })
         .exec()
         .then(result => {
             res.status(200).json({
-                message: 'Rullakko deleted',
+                message: 'Hylly deleted',
                 request: {
                     type: 'POST',
                     url: 'http://localhost:3000/products'

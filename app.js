@@ -14,6 +14,8 @@ const orderRoutes = require('./api/routes/orders');
 const userRoutes = require('./api/routes/user');
 const itemRoutes = require('./api/routes/items');
 const rullakkoRoutes = require('./api/routes/rullakot');
+const hyllyRoutes = require('./api/routes/hyllyt');
+const palautetutRoutes = require('./api/routes/palautetut');
 
 app.use(express.static('public'));
 
@@ -61,6 +63,8 @@ app.use('/orders', orderRoutes);
 app.use('/user', userRoutes);
 app.use('/items', itemRoutes);
 app.use('/rullakot', rullakkoRoutes);
+app.use('/hyllyt', hyllyRoutes);
+app.use('/palautetut', palautetutRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');

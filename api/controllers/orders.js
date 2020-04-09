@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Order = require('../models/order');
 const Product = require('../models/product');
 const Rullakot = require('../models/rullakko');
+const Hyllyt = require('../models/hylly');
 
 exports.orders_get_all = (req, res, next) => {
     Order.find()
@@ -26,7 +27,7 @@ exports.orders_get_date = (req, res, next) => {
     const kukka = decodeURIComponent(req.query.kukka);
 
     Order.find()
-        .populate('products rullakot')
+        .populate('products rullakot hyllyt')
         .exec()
         .then(docs => {
             if (date) {
@@ -47,7 +48,8 @@ exports.orders_get_date = (req, res, next) => {
                             products: doc.products.filter(function (docs) {
                                 return docs.valmis === valmis;
                             }),
-                            rullakot: doc.rullakot
+                            rullakot: doc.rullakot,
+                            hyllyt: doc.hyllyt
                         }
                     })
 
@@ -63,7 +65,8 @@ exports.orders_get_date = (req, res, next) => {
                                 tuusjarvi: doc.tuusjarvi,
                                 ryona: doc.ryona,
                                 products: doc.products,
-                                rullakot: doc.rullakot
+                                rullakot: doc.rullakot,
+                                hyllyt: doc.hyllyt
                             }
                         })
                         if (kauppa === "") {
@@ -80,7 +83,8 @@ exports.orders_get_date = (req, res, next) => {
                                             tuusjarvi: doc.tuusjarvi,
                                             ryona: doc.ryona,
                                             products: doc.products,
-                                            rullakot: doc.rullakot
+                                            rullakot: doc.rullakot,
+                                            hyllyt: doc.hyllyt
                                         }
                                     })
                                 })
@@ -99,7 +103,8 @@ exports.orders_get_date = (req, res, next) => {
                                                 products: doc.products.filter(function (docs) {
                                                     return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
                                                 }),
-                                                rullakot: doc.rullakot
+                                                rullakot: doc.rullakot,
+                                                hyllyt: doc.hyllyt
                                             }
                                         })
                                     })
@@ -122,7 +127,8 @@ exports.orders_get_date = (req, res, next) => {
                                                 tuusjarvi: doc.tuusjarvi,
                                                 ryona: doc.ryona,
                                                 products: doc.products,
-                                                rullakot: doc.rullakot
+                                                rullakot: doc.rullakot,
+                                                hyllyt: doc.hyllyt
                                             }
                                         })
                                     })
@@ -141,7 +147,8 @@ exports.orders_get_date = (req, res, next) => {
                                                     products: doc.products.filter(function (docs) {
                                                         return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
                                                     }),
-                                                    rullakot: doc.rullakot
+                                                    rullakot: doc.rullakot,
+                                                    hyllyt: doc.hyllyt
                                                 }
                                             })
                                         })
@@ -162,7 +169,8 @@ exports.orders_get_date = (req, res, next) => {
                                     products: doc.products.filter(function (docs) {
                                         return docs.kerays === kerays;
                                     }),
-                                    rullakot: doc.rullakot
+                                    rullakot: doc.rullakot,
+                                    hyllyt: doc.hyllyt
                                 }
                             })
                             if (kauppa === "") {
@@ -179,7 +187,8 @@ exports.orders_get_date = (req, res, next) => {
                                                 tuusjarvi: doc.tuusjarvi,
                                                 ryona: doc.ryona,
                                                 products: doc.products,
-                                                rullakot: doc.rullakot
+                                                rullakot: doc.rullakot,
+                                                hyllyt: doc.hyllyt
                                             }
                                         })
                                     })
@@ -198,7 +207,8 @@ exports.orders_get_date = (req, res, next) => {
                                                     products: doc.products.filter(function (docs) {
                                                         return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
                                                     }),
-                                                    rullakot: doc.rullakot
+                                                    rullakot: doc.rullakot,
+                                                    hyllyt: doc.hyllyt
                                                 }
                                             })
                                         })
@@ -221,7 +231,8 @@ exports.orders_get_date = (req, res, next) => {
                                                     tuusjarvi: doc.tuusjarvi,
                                                     ryona: doc.ryona,
                                                     products: doc.products,
-                                                    rullakot: doc.rullakot
+                                                    rullakot: doc.rullakot,
+                                                    hyllyt: doc.hyllyt
                                                 }
                                             })
                                         })
@@ -240,7 +251,8 @@ exports.orders_get_date = (req, res, next) => {
                                                         products: doc.products.filter(function (docs) {
                                                             return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
                                                         }),
-                                                        rullakot: doc.rullakot
+                                                        rullakot: doc.rullakot,
+                                                        hyllyt: doc.hyllyt
                                                     }
                                                 })
                                             })
@@ -264,7 +276,8 @@ exports.orders_get_date = (req, res, next) => {
                                     tuusjarvi: doc.tuusjarvi,
                                     ryona: doc.ryona,
                                     products: doc.products,
-                                    rullakot: doc.rullakot
+                                    rullakot: doc.rullakot,
+                                    hyllyt: doc.hyllyt
                                 }
                             })
                         });
@@ -282,7 +295,8 @@ exports.orders_get_date = (req, res, next) => {
                                     products: doc.products.filter(function (docs) {
                                         return docs.kerays === kerays;
                                     }),
-                                    rullakot: doc.rullakot
+                                    rullakot: doc.rullakot,
+                                    hyllyt: doc.hyllyt
                                 }
                             })
                         });
@@ -302,7 +316,8 @@ exports.orders_get_date = (req, res, next) => {
                             products: doc.products.filter(function (docs) {
                                 return docs.valmis === valmis;
                             }),
-                            rullakot: doc.rullakot
+                            rullakot: doc.rullakot,
+                            hyllyt: doc.hyllyt
                         }
                     })
                     if (kerays === "") {
@@ -317,7 +332,8 @@ exports.orders_get_date = (req, res, next) => {
                                     tuusjarvi: doc.tuusjarvi,
                                     ryona: doc.ryona,
                                     products: doc.products,
-                                    rullakot: doc.rullakot
+                                    rullakot: doc.rullakot,
+                                    hyllyt: doc.hyllyt
                                 }
                             })
                         });
@@ -335,7 +351,8 @@ exports.orders_get_date = (req, res, next) => {
                                     products: doc.products.filter(function (docs) {
                                         return docs.kerays === kerays;
                                     }),
-                                    rullakot: doc.rullakot
+                                    rullakot: doc.rullakot,
+                                    hyllyt: doc.hyllyt
                                 }
                             })
                         });
@@ -354,7 +371,8 @@ exports.orders_get_date = (req, res, next) => {
                                 products: doc.products.filter(function (docs) {
                                     return docs.kerays === kerays;
                                 }),
-                                rullakot: doc.rullakot
+                                rullakot: doc.rullakot,
+                                hyllyt: doc.hyllyt
                             }
                         })
                     });
@@ -386,7 +404,8 @@ exports.orders_create_order = (req, res, next) => {
                 tuusjarvi: req.body.tuusjarvi,
                 ryona: req.body.ryona,
                 products: req.body.products,
-                rullakot: req.body.rullakot
+                rullakot: req.body.rullakot,
+                hyllyt: req.body.hyllyt
             });
             return order
                 .save()
@@ -404,7 +423,8 @@ exports.orders_create_order = (req, res, next) => {
                     tuusjarvi: result.tuusjarvi,
                     ryona: result.ryona,
                     products: result.products,
-                    rullakot: result.rullakot
+                    rullakot: result.rullakot,
+                    hyllyt: result.hyllyt
                 },
                 request: {
                     type: 'GET',
@@ -422,7 +442,7 @@ exports.orders_create_order = (req, res, next) => {
 
 exports.orders_get_order = (req, res, next) => {
     Order.findById(req.params.orderId)
-        .populate('products rullakot')
+        .populate('products rullakot hyllyt')
         .exec()
         .then(order => {
             if (!order) {

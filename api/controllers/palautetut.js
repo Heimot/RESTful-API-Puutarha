@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const Rullakko = require('../models/rullakko');
+const Palautetut = require('../models/palautetut');
 
-exports.rullakko_get_all = (req, res, next) => {
-    Rullakko.find()
+exports.palautetut_get_all = (req, res, next) => {
+    Palautetut.find()
         .exec()
         .then(docs => {
             res.status(200).json(docs);
@@ -15,26 +15,28 @@ exports.rullakko_get_all = (req, res, next) => {
         });
 }
 
-exports.rullakko_create_rullakot = (req, res, next) => {
-    const rullakko = new Rullakko({
+exports.palautetut_create_rullakot = (req, res, next) => {
+    const palautetut = new Palautetut({
+        _id: mongoose.Types.ObjectId(),
         rullakonNimi: req.body.rullakonNimi,
         rullakoidenMaara: req.body.rullakoidenMaara,
-        kaupanNimi: req.body.kaupanNimi,
-        palautetutRullakot: req.body.palautetutRullakot,
-        id: req.body._id,
+        hyllynNimi: req.body.hyllynNimi,
+        hyllyjenMaara: req.body.hyllyjenMaara,
+        kaupanNimi: req.body.kaupanNimi
     });
-    rullakko
+    palautetut
         .save()
         .then(result => {
-            
+
             res.status(201).json({
                 message: 'Created product successfully',
-                createdRullakko: {
+                createdPalautetut: {
                     rullakonNimi: result.rullakonNimi,
                     rullakoidenMaara: result.rullakoidenMaara,
+                    hyllynNimi: result.hyllynNimi,
+                    hyllyjenMaara: result.hyllyjenMaara,
                     kaupanNimi: result.kaupanNimi,
-                    palautetutRullakot: result.palautetutRullakot,
-                    id: result._id,
+                    _id: result._id,
                     request: {
                         type: 'GET',
                         url: 'http://localhost:3000/products/' + result._id
@@ -51,10 +53,9 @@ exports.rullakko_create_rullakot = (req, res, next) => {
 
 }
 
-exports.rullakko_get_by_id = (req, res, next) => {
-    const id = req.params.rullakkoId;
-    Rullakko.findById(id)
-        .select('name price _id')
+exports.palautetut_get_by_id = (req, res, next) => {
+    const id = req.params.palautetutId;
+    Palautetut.findById(id)
         .exec()
         .then(doc => {
             console.log("From database", doc);
@@ -77,13 +78,13 @@ exports.rullakko_get_by_id = (req, res, next) => {
         });
 }
 
-exports.rullakko_update_by_id = (req, res, next) => {
-    const id = req.params.rullakkoId;
-    Rullakko.updateOne({ _id: id }, req.body, { new: true })
+exports.palautetut_update_by_id = (req, res, next) => {
+    const id = req.params.palautetutId;
+    Palautetut.updateOne({ _id: id }, req.body, { new: true })
         .exec()
         .then(result => {
             res.status(200).json({
-                message: 'Rullakko updated',
+                message: 'Palautetut updated',
                 request: {
                     type: 'GET',
                     url: 'http://localhost:3000/products/' + id
@@ -98,18 +99,18 @@ exports.rullakko_update_by_id = (req, res, next) => {
         });
 }
 
-exports.rullakko_patch_by_id = (req, res, next) => {
-    const id = req.params.rullakkoId;
+exports.palautetut_patch_by_id = (req, res, next) => {
+    const id = req.params.palautetutId;
     const updateOps = {};
     for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
-    Rullakko.update({ _id: id }, { $set: updateOps })
+    Palautetut.update({ _id: id }, { $set: updateOps })
         .exec()
         .then(result => {
 
             res.status(200).json({
-                message: 'Rullakko updated',
+                message: 'Palautetut updated',
                 request: {
                     type: 'GET',
                     url: 'http://localhost:3000/products/' + id
@@ -124,13 +125,13 @@ exports.rullakko_patch_by_id = (req, res, next) => {
         });
 }
 
-exports.rullakko_delete_by_id = (req, res, next) => {
-    const id = req.params.rullakkoId;
-    Rullakko.remove({ _id: id })
+exports.palautetut_delete_by_id = (req, res, next) => {
+    const id = req.params.palautetutId;
+    Palautetut.remove({ _id: id })
         .exec()
         .then(result => {
             res.status(200).json({
-                message: 'Rullakko deleted',
+                message: 'Palautetut deleted',
                 request: {
                     type: 'POST',
                     url: 'http://localhost:3000/products'
