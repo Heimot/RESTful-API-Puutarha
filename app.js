@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
@@ -5,8 +6,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 var socket = require('socket.io');
 
-var server = app.listen(3002, function() {
-    console.log('listening to requests on port 3002');
+const PORT = process.env.PORT || 3002;
+
+var server = app.listen(PORT, function () {
+    console.log('listening to requests on port ' + PORT);
 });
 
 const productRoutes = require('./api/routes/products');
@@ -18,10 +21,9 @@ const hyllyRoutes = require('./api/routes/hyllyt');
 const palautetutRoutes = require('./api/routes/palautetut');
 
 app.use(express.static('public'));
-
-mongoose.connect('mongodb+srv://Heimot:'+ process.env.MONGOPW +'@node-rest-api-8ybrw.mongodb.net/test?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://Heimot:' + process.env.MONGOPW + '@node-rest-api-8ybrw.mongodb.net/test?retryWrites=true&w=majority',
     {
-        useNewUrlParser :true,
+        useNewUrlParser: true,
         useUnifiedTopology: true
     }
 );
@@ -31,13 +33,16 @@ mongoose.Promise = global.Promise;
 
 var io = socket(server);
 
-io.on('connection', function(socket) {
+io.on('connection', function (socket) {
 
-    socket.on('chat', function(data) {
+    socket.on('chat', function (data) {
         io.sockets.emit('chat', data);
     });
-    socket.on('idUpdate', function(data) {
+    socket.on('idUpdate', function (data) {
         io.sockets.emit('idUpdate', data);
+    });
+    socket.on('rullakotUpdt', function (data) {
+        io.sockets.emit('rullakotUpdt', data);
     });
 });
 

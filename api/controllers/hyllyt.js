@@ -17,24 +17,21 @@ exports.hylly_get_all = (req, res, next) => {
 
 exports.hylly_create_rullakot = (req, res, next) => {
     const hylly = new Hylly({
+        _id: mongoose.Types.ObjectId(),
         hyllynNimi: req.body.hyllynNimi,
         hyllyjenMaara: req.body.hyllyjenMaara,
-        kaupanNimi: req.body.kaupanNimi,
-        palautetutHyllyt: result.palautetutHyllyt,
-        id: req.body._id,
+        kaupanNimi: req.body.kaupanNimi
     });
     hylly
         .save()
         .then(result => {
-
             res.status(201).json({
                 message: 'Created product successfully',
                 createdHylly: {
                     hyllynNimi: result.hyllynNimi,
                     hyllyjenMaara: result.hyllyjenMaara,
                     kaupanNimi: result.kaupanNimi,
-                    palautetutHyllyt: result.palautetutHyllyt,
-                    id: result._id,
+                    _id: result._id,
                     request: {
                         type: 'GET',
                         url: 'http://localhost:3000/products/' + result._id

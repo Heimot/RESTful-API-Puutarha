@@ -17,7 +17,7 @@ exports.palautetut_get_all = (req, res, next) => {
 
 exports.palautetut_create_rullakot = (req, res, next) => {
     const palautetut = new Palautetut({
-        _id: mongoose.Types.ObjectId(),
+        _id: req.body._id,
         rullakonNimi: req.body.rullakonNimi,
         rullakoidenMaara: req.body.rullakoidenMaara,
         hyllynNimi: req.body.hyllynNimi,
