@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.4",
+    "webpack-cli": "^3.3.11",
     "webpack-merge": "^4.2.2"
   }
 }

@@ -21,7 +21,7 @@ const hyllyRoutes = require('./api/routes/hyllyt');
 const palautetutRoutes = require('./api/routes/palautetut');
 
 app.use(express.static('public'));
-mongoose.connect('mongodb+srv://Heimot:' + process.env.MONGOPW + '@node-rest-api-8ybrw.mongodb.net/test?retryWrites=true&w=majority',
+mongoose.connect('mongodb://'+ process.env.USER +':' + process.env.MONGOPW + '@' + DNS_SERVER,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
