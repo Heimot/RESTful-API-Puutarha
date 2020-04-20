@@ -2,10 +2,17 @@ const mongoose = require('mongoose');
 const Palautetut = require('../models/palautetut');
 
 exports.palautetut_get_all = (req, res, next) => {
+    let year = req.query.year;
     Palautetut.find()
         .exec()
         .then(docs => {
-            res.status(200).json(docs);
+            if (year.length > 1) {
+                res.status(200).json(docs.filter(doc => {
+                    return doc.vuosi === parseInt(year)
+                }));
+            } else {
+                res.status(200).json(docs)
+            }
         })
         .catch(err => {
             console.log(err);
@@ -22,7 +29,8 @@ exports.palautetut_create_rullakot = (req, res, next) => {
         rullakoidenMaara: req.body.rullakoidenMaara,
         hyllynNimi: req.body.hyllynNimi,
         hyllyjenMaara: req.body.hyllyjenMaara,
-        kaupanNimi: req.body.kaupanNimi
+        kaupanNimi: req.body.kaupanNimi,
+        vuosi: req.body.vuosi,
     });
     palautetut
         .save()
@@ -36,6 +44,7 @@ exports.palautetut_create_rullakot = (req, res, next) => {
                     hyllynNimi: result.hyllynNimi,
                     hyllyjenMaara: result.hyllyjenMaara,
                     kaupanNimi: result.kaupanNimi,
+                    vuosi: result.vuosi,
                     _id: result._id,
                     request: {
                         type: 'GET',

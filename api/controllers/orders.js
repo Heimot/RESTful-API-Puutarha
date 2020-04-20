@@ -157,24 +157,68 @@ exports.orders_get_date = (req, res, next) => {
                             }
                         }
                     } else {
-                            result3 = result2.map(doc => {
-                                return {
-                                    _id: doc._id,
-                                    date: doc.date,
-                                    kauppa: doc.kauppa,
-                                    alisatieto: doc.alisatieto,
-                                    toimituspvm: doc.toimituspvm,
-                                    tuusjarvi: doc.tuusjarvi,
-                                    ryona: doc.ryona,
-                                    products: doc.products.filter(function (docs) {
-                                        return docs.kerays === kerays;
-                                    }),
-                                    rullakot: doc.rullakot,
-                                    hyllyt: doc.hyllyt
+                        result3 = result2.map(doc => {
+                            return {
+                                _id: doc._id,
+                                date: doc.date,
+                                kauppa: doc.kauppa,
+                                alisatieto: doc.alisatieto,
+                                toimituspvm: doc.toimituspvm,
+                                tuusjarvi: doc.tuusjarvi,
+                                ryona: doc.ryona,
+                                products: doc.products.filter(function (docs) {
+                                    return docs.kerays === kerays;
+                                }),
+                                rullakot: doc.rullakot,
+                                hyllyt: doc.hyllyt
+                            }
+                        })
+                        if (kauppa === "") {
+                            const result4 = result3;
+                            if (kukka === "") {
+                                res.status(200).json({
+                                    product: result4.map(doc => {
+                                        return {
+                                            _id: doc._id,
+                                            date: doc.date,
+                                            kauppa: doc.kauppa,
+                                            alisatieto: doc.alisatieto,
+                                            toimituspvm: doc.toimituspvm,
+                                            tuusjarvi: doc.tuusjarvi,
+                                            ryona: doc.ryona,
+                                            products: doc.products,
+                                            rullakot: doc.rullakot,
+                                            hyllyt: doc.hyllyt
+                                        }
+                                    })
+                                })
+                            } else {
+                                if (kukka) {
+                                    res.status(200).json({
+                                        product: result4.map(doc => {
+                                            return {
+                                                _id: doc._id,
+                                                date: doc.date,
+                                                kauppa: doc.kauppa,
+                                                alisatieto: doc.alisatieto,
+                                                toimituspvm: doc.toimituspvm,
+                                                tuusjarvi: doc.tuusjarvi,
+                                                ryona: doc.ryona,
+                                                products: doc.products.filter(function (docs) {
+                                                    return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
+                                                }),
+                                                rullakot: doc.rullakot,
+                                                hyllyt: doc.hyllyt
+                                            }
+                                        })
+                                    })
                                 }
-                            })
-                            if (kauppa === "") {
-                                const result4 = result3;
+                            }
+                        } else {
+                            if (kauppa) {
+                                const result4 = result3.filter(function (docs) {
+                                    return docs.kauppa.toLowerCase().includes(kauppa.toLowerCase());
+                                })
                                 if (kukka === "") {
                                     res.status(200).json({
                                         product: result4.map(doc => {
@@ -214,52 +258,8 @@ exports.orders_get_date = (req, res, next) => {
                                         })
                                     }
                                 }
-                            } else {
-                                if (kauppa) {
-                                    const result4 = result3.filter(function (docs) {
-                                        return docs.kauppa.toLowerCase().includes(kauppa.toLowerCase());
-                                    })
-                                    if (kukka === "") {
-                                        res.status(200).json({
-                                            product: result4.map(doc => {
-                                                return {
-                                                    _id: doc._id,
-                                                    date: doc.date,
-                                                    kauppa: doc.kauppa,
-                                                    alisatieto: doc.alisatieto,
-                                                    toimituspvm: doc.toimituspvm,
-                                                    tuusjarvi: doc.tuusjarvi,
-                                                    ryona: doc.ryona,
-                                                    products: doc.products,
-                                                    rullakot: doc.rullakot,
-                                                    hyllyt: doc.hyllyt
-                                                }
-                                            })
-                                        })
-                                    } else {
-                                        if (kukka) {
-                                            res.status(200).json({
-                                                product: result4.map(doc => {
-                                                    return {
-                                                        _id: doc._id,
-                                                        date: doc.date,
-                                                        kauppa: doc.kauppa,
-                                                        alisatieto: doc.alisatieto,
-                                                        toimituspvm: doc.toimituspvm,
-                                                        tuusjarvi: doc.tuusjarvi,
-                                                        ryona: doc.ryona,
-                                                        products: doc.products.filter(function (docs) {
-                                                            return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
-                                                        }),
-                                                        rullakot: doc.rullakot,
-                                                        hyllyt: doc.hyllyt
-                                                    }
-                                                })
-                                            })
-                                        }
-                                    }
-                                }
                             }
+                        }
                     }
 
                 } else {
@@ -415,7 +415,7 @@ exports.orders_create_order = (req, res, next) => {
             res.status(201).json({
                 message: 'Order stored',
                 createdOrder: {
-                    id_: result._id,
+                    _id: result._id,
                     kauppa: result.kauppa,
                     alisatieto: result.alisatieto,
                     date: result.date,
@@ -441,6 +441,7 @@ exports.orders_create_order = (req, res, next) => {
 }
 
 exports.orders_get_order = (req, res, next) => {
+    const paikka = req.query.paikka;
     Order.findById(req.params.orderId)
         .populate('products rullakot hyllyt')
         .exec()
@@ -450,7 +451,24 @@ exports.orders_get_order = (req, res, next) => {
                     message: 'Order not found'
                 });
             }
-            res.status(200).json(order);
+            if (paikka) {
+                res.status(200).json({
+                    _id: order._id,
+                    date: order.date,
+                    kauppa: order.kauppa,
+                    alisatieto: order.alisatieto,
+                    toimituspvm: order.toimituspvm,
+                    tuusjarvi: order.tuusjarvi,
+                    ryona: order.ryona,
+                    products: order.products.filter(doc => {
+                        return doc.kerays === paikka
+                    }),
+                    rullakot: order.rullakot,
+                    hyllyt: order.hyllyt
+                });
+            } else {
+                res.status(200).json(order)
+            }
         })
         .catch(err => {
             res.status(500).json({

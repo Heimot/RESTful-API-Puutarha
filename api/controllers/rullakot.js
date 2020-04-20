@@ -2,10 +2,17 @@ const mongoose = require('mongoose');
 const Rullakko = require('../models/rullakko');
 
 exports.rullakko_get_all = (req, res, next) => {
+    let year = req.query.year;
     Rullakko.find()
         .exec()
         .then(docs => {
-            res.status(200).json(docs);
+            if (year.length > 1) {
+                res.status(200).json(docs.filter(doc => {
+                    return doc.vuosi === parseInt(year)
+                }));
+            } else {
+                res.status(200).json(docs)
+            }
         })
         .catch(err => {
             console.log(err);
@@ -21,6 +28,7 @@ exports.rullakko_create_rullakot = (req, res, next) => {
         rullakoidenMaara: req.body.rullakoidenMaara,
         kaupanNimi: req.body.kaupanNimi,
         palautetutRullakot: req.body.palautetutRullakot,
+        vuosi: req.body.vuosi,
         id: req.body._id,
     });
     rullakko
@@ -34,6 +42,7 @@ exports.rullakko_create_rullakot = (req, res, next) => {
                     rullakoidenMaara: result.rullakoidenMaara,
                     kaupanNimi: result.kaupanNimi,
                     palautetutRullakot: result.palautetutRullakot,
+                    vuosi: result.vuosi,
                     id: result._id,
                     request: {
                         type: 'GET',

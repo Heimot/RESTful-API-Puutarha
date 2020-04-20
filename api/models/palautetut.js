@@ -6,7 +6,8 @@ const palautetutSchema = mongoose.Schema({
     rullakoidenMaara: {type: Number, default: 0},
     hyllynNimi: {type: String},
     hyllyjenMaara: {type: Number, default: 0},
-    kaupanNimi: {type: String, required: true}
+    kaupanNimi: {type: String, required: true},
+    vuosi: {type: Number, required: true}
 });
 
 module.exports = mongoose.model('Palautetut', palautetutSchema);

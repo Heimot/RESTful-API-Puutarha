@@ -11,5 +11,11 @@ module.exports = {
         "/rullakot/get", "/rullakot/post", "/rullakot/get/id/", "/rullakot/put/id/", "/rullakot/patch/id/", "/rullakot/delete/id/",
         "/hyllyt/get", "/hyllyt/post", "/hyllyt/get/id/", "/hyllyt/put/id/", "/hyllyt/patch/id/", "/hyllyt/delete/id/",
         "/palautetut/get", "/palautetut/post", "/palautetut/get/id/", "/palautetut/put/id/", "/palautetut/patch/id/", "/palautetut/delete/id/"
+    ],
+
+    Kuski: [
+        "/palautetut/get", "/palautetut/post", "/palautetut/put/id/", "/palautetut/patch/id/",
+        "/rullakot/get",
+        "/hyllyt/get",
     ]
 }

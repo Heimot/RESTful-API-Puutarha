@@ -8,24 +8,32 @@ module.exports = (req, res, next) => {
         const decoded = jwt.verify(token, process.env.JWT_KEY);
 
         if (role[decoded.roles].find(function (url) {
-            if(req.originalUrl.includes("tables")) {
+            if (req.originalUrl.includes("tables")) {
 
                 return url === req.originalUrl.split("?")[0];
 
             } else if (req.originalUrl.includes("/id/")) {
-                
+
                 return url === req.originalUrl.substring(0, req.originalUrl.indexOf("/id/")) + "/id/";
 
+            } else if (req.originalUrl.includes("/palautetut/get")) {
+                return url === req.originalUrl.split("?")[0];
+            
+            } else if (req.originalUrl.includes("/hyllyt/get")) {
+                return url === req.originalUrl.split("?")[0];
+            
+            } else if (req.originalUrl.includes("/rullakot/get")) {
+                return url === req.originalUrl.split("?")[0];
             } else {
 
-            return url === req.originalUrl
+                return url === req.originalUrl
             }
 
         })) {
             req.userData = decoded;
             next();
         } else
-        return res.status(401).send('Access Denied: You dont have correct privilege to perform this operation');
+            return res.status(401).send('Access Denied: You dont have correct privilege to perform this operation');
     } catch (error) {
         return res.status(401).json({
             message: 'Auth failed'

@@ -5,6 +5,7 @@ const hyllySchema = mongoose.Schema({
     hyllynNimi: {type: String, required: true, default: "Oma"},
     hyllyjenMaara: {type: Number, required: true, default: 0},
     kaupanNimi: {type: String, required: true},
+    vuosi: {type: Number, required: true}
 });
 
 module.exports = mongoose.model('Hyllyt', hyllySchema);
