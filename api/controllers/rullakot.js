@@ -29,6 +29,7 @@ exports.rullakko_create_rullakot = (req, res, next) => {
         kaupanNimi: req.body.kaupanNimi,
         palautetutRullakot: req.body.palautetutRullakot,
         vuosi: req.body.vuosi,
+        history: new Date(),
         id: req.body._id,
     });
     rullakko
@@ -43,6 +44,7 @@ exports.rullakko_create_rullakot = (req, res, next) => {
                     kaupanNimi: result.kaupanNimi,
                     palautetutRullakot: result.palautetutRullakot,
                     vuosi: result.vuosi,
+                    history: result.history,
                     id: result._id,
                     request: {
                         type: 'GET',

@@ -5,7 +5,8 @@ const rullakkoSchema = mongoose.Schema({
     rullakoidenMaara: {type: Number, required: true, default: 0},
     kaupanNimi: {type: String, required: true},
     palautetutRullakot: {type: Number, required: true, default: 0},
-    vuosi: {type: Number, required: true}
+    vuosi: {type: Number, required: true},
+    history: {type: String, default: new Date()}
 });
 
 module.exports = mongoose.model('Rullakot', rullakkoSchema);
