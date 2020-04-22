@@ -442,6 +442,7 @@ exports.orders_create_order = (req, res, next) => {
 
 exports.orders_get_order = (req, res, next) => {
     const paikka = req.query.paikka;
+    const valmius = req.query.valmis;
     Order.findById(req.params.orderId)
         .populate('products rullakot hyllyt')
         .exec()
@@ -451,7 +452,7 @@ exports.orders_get_order = (req, res, next) => {
                     message: 'Order not found'
                 });
             }
-            if (paikka) {
+            if (paikka && valmius) {
                 res.status(200).json({
                     _id: order._id,
                     date: order.date,
@@ -462,6 +463,8 @@ exports.orders_get_order = (req, res, next) => {
                     ryona: order.ryona,
                     products: order.products.filter(doc => {
                         return doc.kerays === paikka
+                    }).filter(docs => {
+                        return docs.valmis === valmius
                     }),
                     rullakot: order.rullakot,
                     hyllyt: order.hyllyt

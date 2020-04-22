@@ -31,6 +31,10 @@ exports.palautetut_create_rullakot = (req, res, next) => {
         hyllyjenMaara: req.body.hyllyjenMaara,
         kaupanNimi: req.body.kaupanNimi,
         vuosi: req.body.vuosi,
+        history: req.body.history,
+        oldData: req.body.oldData,
+        history2: req.body.history2,
+        oldData2: req.body.oldData2,
     });
     palautetut
         .save()
@@ -45,6 +49,10 @@ exports.palautetut_create_rullakot = (req, res, next) => {
                     hyllyjenMaara: result.hyllyjenMaara,
                     kaupanNimi: result.kaupanNimi,
                     vuosi: result.vuosi,
+                    history: result.history,
+                    oldData: result.oldData,
+                    history2: result.history2,
+                    oldData2: result.oldData2,
                     _id: result._id,
                     request: {
                         type: 'GET',

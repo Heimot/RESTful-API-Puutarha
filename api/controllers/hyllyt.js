@@ -29,6 +29,7 @@ exports.hylly_create_rullakot = (req, res, next) => {
         hyllyjenMaara: req.body.hyllyjenMaara,
         kaupanNimi: req.body.kaupanNimi,
         vuosi: req.body.vuosi,
+        history: req.body.history,
     });
     hylly
         .save()
@@ -40,6 +41,7 @@ exports.hylly_create_rullakot = (req, res, next) => {
                     hyllyjenMaara: result.hyllyjenMaara,
                     kaupanNimi: result.kaupanNimi,
                     vuosi: result.vuosi,
+                    history: result.history,
                     _id: result._id,
                     request: {
                         type: 'GET',
