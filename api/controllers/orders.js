@@ -440,6 +440,118 @@ exports.orders_create_order = (req, res, next) => {
         });
 }
 
+exports.orders_get_calendar = (req, res, next) => {
+    const date = req.query.date;
+    const valmis = req.query.valmis;
+
+    Order.find()
+        .exec()
+        .then(docs => {
+            if (date) {
+                const result = docs.filter(function (docs) {
+                    return docs.date === date;
+                });
+                if (valmis) {
+
+                    res.status(200).json({
+                        product: result.map(doc => {
+                            return {
+                                _id: doc._id,
+                                date: doc.date,
+                                kauppa: doc.kauppa,
+                                toimituspvm: doc.toimituspvm,
+                            }
+                        })
+                    })
+
+                }
+            } else {
+                if (valmis) {
+                    res.status(200).json({
+                        product: docs.map(doc => {
+                            return {
+                                _id: doc._id,
+                                date: doc.date,
+                                kauppa: doc.kauppa,
+                                toimituspvm: doc.toimituspvm,
+                            }
+                        })
+                    })
+                } else {
+                    res.status(200).json({
+                        product: docs.map(doc => {
+                            return {
+                                _id: doc._id,
+                                date: doc.date,
+                                kauppa: doc.kauppa,
+                                toimituspvm: doc.toimituspvm,
+                            }
+                        })
+                    });
+                }
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+}
+
+exports.orders_create_order = (req, res, next) => {
+    Product.find()
+        .then(product => {
+            if (!product) {
+                return res.status(404).json({
+                    message: "Product not found"
+                });
+            }
+            const order = new Order({
+                _id: mongoose.Types.ObjectId(),
+                kauppa: req.body.kauppa,
+                alisatieto: req.body.alisatieto,
+                date: req.body.date,
+                toimituspvm: req.body.toimituspvm,
+                tuusjarvi: req.body.tuusjarvi,
+                ryona: req.body.ryona,
+                products: req.body.products,
+                rullakot: req.body.rullakot,
+                hyllyt: req.body.hyllyt
+            });
+            return order
+                .save()
+        })
+        .then(result => {
+            console.log(result);
+            res.status(201).json({
+                message: 'Order stored',
+                createdOrder: {
+                    _id: result._id,
+                    kauppa: result.kauppa,
+                    alisatieto: result.alisatieto,
+                    date: result.date,
+                    toimituspvm: result.toimituspvm,
+                    tuusjarvi: result.tuusjarvi,
+                    ryona: result.ryona,
+                    products: result.products,
+                    rullakot: result.rullakot,
+                    hyllyt: result.hyllyt
+                },
+                request: {
+                    type: 'GET',
+                    url: 'http://localhost:3000/orders/' + result._id
+                }
+            });
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({
+                error: err
+            });
+        });
+}
+
 exports.orders_get_order = (req, res, next) => {
     const paikka = req.query.paikka;
     const valmius = req.query.valmis;

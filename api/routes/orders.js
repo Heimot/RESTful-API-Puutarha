@@ -9,6 +9,8 @@ router.get('/', checkAuth, ordersController.orders_get_all);
 
 router.get('/tables', checkAuth, ordersController.orders_get_date);
 
+router.get('/get/calendar', checkAuth, ordersController.orders_get_calendar);
+
 router.post('/post/', checkAuth, ordersController.orders_create_order);
 
 router.get('/get/id/:orderId', checkAuth, ordersController.orders_get_order);

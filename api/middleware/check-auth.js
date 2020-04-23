@@ -18,12 +18,14 @@ module.exports = (req, res, next) => {
 
             } else if (req.originalUrl.includes("/palautetut/get")) {
                 return url === req.originalUrl.split("?")[0];
-            
+
             } else if (req.originalUrl.includes("/hyllyt/get")) {
                 return url === req.originalUrl.split("?")[0];
-            
+
             } else if (req.originalUrl.includes("/rullakot/get")) {
                 return url === req.originalUrl.split("?")[0];
+            } else if (req.originalUrl.includes("/orders/get/calendar")) {
+                return url === req.originalUrl.split('?')[0];
             } else {
 
                 return url === req.originalUrl
