@@ -4,6 +4,7 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const compression = require('compression');
 var socket = require('socket.io');
 
 const PORT = process.env.PORT || 3002;
@@ -20,6 +21,7 @@ const rullakkoRoutes = require('./api/routes/rullakot');
 const hyllyRoutes = require('./api/routes/hyllyt');
 const palautetutRoutes = require('./api/routes/palautetut');
 
+app.use(compression());
 app.use(express.static('public'));
 // SERVERmongoose.connect('mongodb://'+ process.env.USER +':' + process.env.MONGOPW + '@' + process.env.DNS_SERVER,
 mongoose.connect('mongodb+srv://Heimot:' + process.env.DEV + '@node-rest-api-8ybrw.mongodb.net/test?retryWrites=true&w=majority',
@@ -56,6 +58,7 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.header('Accept-Encoding', 'gzip');
     if (req.method === 'OPTIONS') {
         res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
         return res.status(200).json({});

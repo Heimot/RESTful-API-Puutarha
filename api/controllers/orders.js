@@ -442,53 +442,24 @@ exports.orders_create_order = (req, res, next) => {
 
 exports.orders_get_calendar = (req, res, next) => {
     const date = req.query.date;
-    const valmis = req.query.valmis;
+    const toimituspvm = req.query.toimitus;
 
     Order.find()
+        .lean().populate('products', 'tarkastettu')
         .exec()
         .then(docs => {
             if (date) {
-                const result = docs.filter(function (docs) {
-                    return docs.date === date;
+                res.status(200).json({
+                    product: docs.filter(function (docs) {
+                        return docs.date === date;
+                    })
                 });
-                if (valmis) {
-
-                    res.status(200).json({
-                        product: result.map(doc => {
-                            return {
-                                _id: doc._id,
-                                date: doc.date,
-                                kauppa: doc.kauppa,
-                                toimituspvm: doc.toimituspvm,
-                            }
-                        })
-                    })
-
-                }
             } else {
-                if (valmis) {
-                    res.status(200).json({
-                        product: docs.map(doc => {
-                            return {
-                                _id: doc._id,
-                                date: doc.date,
-                                kauppa: doc.kauppa,
-                                toimituspvm: doc.toimituspvm,
-                            }
-                        })
+                res.status(200).json({
+                    product: docs.filter(function (docs) {
+                        return docs.toimituspvm === toimituspvm;
                     })
-                } else {
-                    res.status(200).json({
-                        product: docs.map(doc => {
-                            return {
-                                _id: doc._id,
-                                date: doc.date,
-                                kauppa: doc.kauppa,
-                                toimituspvm: doc.toimituspvm,
-                            }
-                        })
-                    });
-                }
+                });
             }
         })
         .catch(err => {
