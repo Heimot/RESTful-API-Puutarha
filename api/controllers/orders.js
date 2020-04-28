@@ -524,7 +524,8 @@ exports.orders_create_order = (req, res, next) => {
 }
 
 exports.orders_get_order = (req, res, next) => {
-    const paikka = req.query.paikka;
+    const paikka = decodeURIComponent(req.query.paikka);
+    const kukka = decodeURIComponent(req.query.kukka);
     const valmius = req.query.valmis;
     Order.findById(req.params.orderId)
         .populate('products rullakot hyllyt')
@@ -535,7 +536,7 @@ exports.orders_get_order = (req, res, next) => {
                     message: 'Order not found'
                 });
             }
-            if (paikka && valmius) {
+            if (paikka && valmius && kukka === "") {
                 res.status(200).json({
                     _id: order._id,
                     date: order.date,
@@ -551,7 +552,26 @@ exports.orders_get_order = (req, res, next) => {
                     }),
                     rullakot: order.rullakot,
                     hyllyt: order.hyllyt
-                });
+                })
+            } else if (paikka && valmius && kukka) {
+                res.status(200).json({
+                    _id: order._id,
+                    date: order.date,
+                    kauppa: order.kauppa,
+                    alisatieto: order.alisatieto,
+                    toimituspvm: order.toimituspvm,
+                    tuusjarvi: order.tuusjarvi,
+                    ryona: order.ryona,
+                    products: order.products.filter(doc => {
+                        return doc.kerays === paikka
+                    }).filter(docs => {
+                        return docs.valmis === valmius
+                    }).filter(docs => {
+                        return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
+                    }),
+                    rullakot: order.rullakot,
+                    hyllyt: order.hyllyt
+                })
             } else {
                 res.status(200).json(order)
             }
