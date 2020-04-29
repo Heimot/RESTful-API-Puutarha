@@ -445,7 +445,7 @@ exports.orders_get_calendar = (req, res, next) => {
     const toimituspvm = req.query.toimitus;
 
     Order.find()
-        .lean().populate('products', 'tarkastettu')
+        .select('tuusjarvi ryona toimituspvm date kauppa')
         .exec()
         .then(docs => {
             if (date) {

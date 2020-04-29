@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const compression = require('compression');
 var socket = require('socket.io');
+//var socketioJwt = require("socketio-jwt");
 
 const PORT = process.env.PORT || 3002;
 
@@ -35,9 +36,13 @@ mongoose.Promise = global.Promise;
 ///////////////////////////
 
 var io = socket(server);
+/*
+io.use(socketioJwt.authorize({
+    secret: process.env.JWT_KEY,
+    handshake: true
+  }));*/
 
 io.on('connection', function (socket) {
-
     socket.on('chat', function (data) {
         io.sockets.emit('chat', data);
     });
