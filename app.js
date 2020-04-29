@@ -36,11 +36,11 @@ mongoose.Promise = global.Promise;
 ///////////////////////////
 
 var io = socket(server);
-/*
+
 io.use(socketioJwt.authorize({
     secret: process.env.JWT_KEY,
     handshake: true
-  }));*/
+  }));
 
 io.on('connection', function (socket) {
     socket.on('chat', function (data) {
