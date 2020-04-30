@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const compression = require('compression');
 var socket = require('socket.io');
-//var socketioJwt = require("socketio-jwt");
+var socketioJwt = require("socketio-jwt");
 
 const PORT = process.env.PORT || 3002;
 
