@@ -536,7 +536,18 @@ exports.orders_get_order = (req, res, next) => {
                     hyllyt: order.hyllyt
                 })
             } else {
-                res.status(200).json(order)
+                res.status(200).json({
+                    _id: order._id,
+                    date: order.date,
+                    kauppa: order.kauppa,
+                    alisatieto: order.alisatieto,
+                    toimituspvm: order.toimituspvm,
+                    tuusjarvi: order.tuusjarvi,
+                    ryona: order.ryona,
+                    products: order.products.sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
+                    rullakot: order.rullakot,
+                    hyllyt: order.hyllyt
+                })
             }
         })
         .catch(err => {
