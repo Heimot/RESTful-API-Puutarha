@@ -49,7 +49,8 @@ exports.orders_get_date = (req, res, next) => {
                                 return docs.valmis === valmis;
                             }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                             rullakot: doc.rullakot,
-                            hyllyt: doc.hyllyt
+                            hyllyt: doc.hyllyt,
+                            rekka: doc.rekka
                         }
                     })
 
@@ -66,7 +67,8 @@ exports.orders_get_date = (req, res, next) => {
                                 ryona: doc.ryona,
                                 products: doc.products.sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                 rullakot: doc.rullakot,
-                                hyllyt: doc.hyllyt
+                                hyllyt: doc.hyllyt,
+                                rekka: doc.rekka
                             }
                         })
                         if (kauppa === "") {
@@ -84,7 +86,8 @@ exports.orders_get_date = (req, res, next) => {
                                             ryona: doc.ryona,
                                             products: doc.products.sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                             rullakot: doc.rullakot,
-                                            hyllyt: doc.hyllyt
+                                            hyllyt: doc.hyllyt,
+                                            rekka: doc.rekka
                                         }
                                     })
                                 })
@@ -104,7 +107,8 @@ exports.orders_get_date = (req, res, next) => {
                                                     return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
                                                 }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                                 rullakot: doc.rullakot,
-                                                hyllyt: doc.hyllyt
+                                                hyllyt: doc.hyllyt,
+                                                rekka: doc.rekka
                                             }
                                         })
                                     })
@@ -128,7 +132,8 @@ exports.orders_get_date = (req, res, next) => {
                                                 ryona: doc.ryona,
                                                 products: doc.products.sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                                 rullakot: doc.rullakot,
-                                                hyllyt: doc.hyllyt
+                                                hyllyt: doc.hyllyt,
+                                                rekka: doc.rekka
                                             }
                                         })
                                     })
@@ -148,7 +153,8 @@ exports.orders_get_date = (req, res, next) => {
                                                         return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
                                                     }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                                     rullakot: doc.rullakot,
-                                                    hyllyt: doc.hyllyt
+                                                    hyllyt: doc.hyllyt,
+                                                    rekka: doc.rekka
                                                 }
                                             })
                                         })
@@ -170,7 +176,8 @@ exports.orders_get_date = (req, res, next) => {
                                     return docs.kerays === kerays;
                                 }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                 rullakot: doc.rullakot,
-                                hyllyt: doc.hyllyt
+                                hyllyt: doc.hyllyt,
+                                rekka: doc.rekka
                             }
                         })
                         if (kauppa === "") {
@@ -188,7 +195,8 @@ exports.orders_get_date = (req, res, next) => {
                                             ryona: doc.ryona,
                                             products: doc.products.sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                             rullakot: doc.rullakot,
-                                            hyllyt: doc.hyllyt
+                                            hyllyt: doc.hyllyt,
+                                            rekka: doc.rekka
                                         }
                                     })
                                 })
@@ -208,7 +216,8 @@ exports.orders_get_date = (req, res, next) => {
                                                     return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
                                                 }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                                 rullakot: doc.rullakot,
-                                                hyllyt: doc.hyllyt
+                                                hyllyt: doc.hyllyt,
+                                                rekka: doc.rekka
                                             }
                                         })
                                     })
@@ -232,7 +241,8 @@ exports.orders_get_date = (req, res, next) => {
                                                 ryona: doc.ryona,
                                                 products: doc.products.sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                                 rullakot: doc.rullakot,
-                                                hyllyt: doc.hyllyt
+                                                hyllyt: doc.hyllyt,
+                                                rekka: doc.rekka
                                             }
                                         })
                                     })
@@ -252,7 +262,8 @@ exports.orders_get_date = (req, res, next) => {
                                                         return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
                                                     }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                                     rullakot: doc.rullakot,
-                                                    hyllyt: doc.hyllyt
+                                                    hyllyt: doc.hyllyt,
+                                                    rekka: doc.rekka
                                                 }
                                             })
                                         })
@@ -277,7 +288,8 @@ exports.orders_get_date = (req, res, next) => {
                                     ryona: doc.ryona,
                                     products: doc.products.sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                     rullakot: doc.rullakot,
-                                    hyllyt: doc.hyllyt
+                                    hyllyt: doc.hyllyt,
+                                    rekka: doc.rekka
                                 }
                             })
                         });
@@ -296,7 +308,8 @@ exports.orders_get_date = (req, res, next) => {
                                         return docs.kerays === kerays;
                                     }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                     rullakot: doc.rullakot,
-                                    hyllyt: doc.hyllyt
+                                    hyllyt: doc.hyllyt,
+                                    rekka: doc.rekka
                                 }
                             })
                         });
@@ -317,7 +330,8 @@ exports.orders_get_date = (req, res, next) => {
                                 return docs.valmis === valmis;
                             }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                             rullakot: doc.rullakot,
-                            hyllyt: doc.hyllyt
+                            hyllyt: doc.hyllyt,
+                            rekka: doc.rekka
                         }
                     })
                     if (kerays === "") {
@@ -333,7 +347,8 @@ exports.orders_get_date = (req, res, next) => {
                                     ryona: doc.ryona,
                                     products: doc.products.sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                     rullakot: doc.rullakot,
-                                    hyllyt: doc.hyllyt
+                                    hyllyt: doc.hyllyt,
+                                    rekka: doc.rekka
                                 }
                             })
                         });
@@ -352,7 +367,8 @@ exports.orders_get_date = (req, res, next) => {
                                         return docs.kerays === kerays;
                                     }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                     rullakot: doc.rullakot,
-                                    hyllyt: doc.hyllyt
+                                    hyllyt: doc.hyllyt,
+                                    rekka: doc.rekka
                                 }
                             })
                         });
@@ -372,7 +388,8 @@ exports.orders_get_date = (req, res, next) => {
                                     return docs.kerays === kerays;
                                 }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                 rullakot: doc.rullakot,
-                                hyllyt: doc.hyllyt
+                                hyllyt: doc.hyllyt,
+                                rekka: doc.rekka
                             }
                         })
                     });
@@ -405,7 +422,8 @@ exports.orders_create_order = (req, res, next) => {
                 ryona: req.body.ryona,
                 products: req.body.products,
                 rullakot: req.body.rullakot,
-                hyllyt: req.body.hyllyt
+                hyllyt: req.body.hyllyt,
+                rekka: req.body.rekka
             });
             return order
                 .save()
@@ -423,7 +441,8 @@ exports.orders_create_order = (req, res, next) => {
                     ryona: result.ryona,
                     products: result.products,
                     rullakot: result.rullakot,
-                    hyllyt: result.hyllyt
+                    hyllyt: result.hyllyt,
+                    rekka: result.rekka
                 },
                 request: {
                     type: 'GET',
@@ -444,20 +463,45 @@ exports.orders_get_calendar = (req, res, next) => {
     const toimituspvm = req.query.toimitus;
 
     Order.find()
-        .select('tuusjarvi ryona toimituspvm date kauppa')
+        .populate('rullakot', 'rullakoidenMaara')
         .exec()
         .then(docs => {
             if (date) {
+                let result2 = docs.filter(function (docs) {
+                    return docs.date === date;
+                })
                 res.status(200).json({
-                    product: docs.filter(function (docs) {
-                        return docs.date === date;
+                    product: result2.map(doc => {
+                        return {
+                            _id: doc._id,
+                            date: doc.date,
+                            kauppa: doc.kauppa,
+                            toimituspvm: doc.toimituspvm,
+                            tuusjarvi: doc.tuusjarvi,
+                            ryona: doc.ryona,
+                            rullakot: doc.rullakot,
+                            rekka: doc.rekka
+                        }
                     })
                 });
             } else {
+                let result = docs.filter(function (docs) {
+                    return docs.toimituspvm === toimituspvm;
+                })
                 res.status(200).json({
-                    product: docs.filter(function (docs) {
-                        return docs.toimituspvm === toimituspvm;
+                    product: result.map(doc => {
+                        return {
+                            _id: doc._id,
+                            date: doc.date,
+                            kauppa: doc.kauppa,
+                            toimituspvm: doc.toimituspvm,
+                            tuusjarvi: doc.tuusjarvi,
+                            ryona: doc.ryona,
+                            rullakot: doc.rullakot,
+                            rekka: doc.rekka
+                        }
                     })
+
                 });
             }
         })
@@ -497,7 +541,8 @@ exports.orders_get_order = (req, res, next) => {
                         return docs.valmis === valmius
                     }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                     rullakot: order.rullakot,
-                    hyllyt: order.hyllyt
+                    hyllyt: order.hyllyt,
+                    rekka: order.rekka
                 })
             } else if (paikka && valmius && kukka) {
                 res.status(200).json({
@@ -516,7 +561,8 @@ exports.orders_get_order = (req, res, next) => {
                         return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
                     }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                     rullakot: order.rullakot,
-                    hyllyt: order.hyllyt
+                    hyllyt: order.hyllyt,
+                    rekka: order.rekka
                 })
             } else if (paikka === "" && valmius && kukka) {
                 res.status(200).json({
@@ -533,7 +579,8 @@ exports.orders_get_order = (req, res, next) => {
                         return docs.kukka.toLowerCase().includes(kukka.toLowerCase());
                     }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                     rullakot: order.rullakot,
-                    hyllyt: order.hyllyt
+                    hyllyt: order.hyllyt,
+                    rekka: order.rekka
                 })
             } else {
                 res.status(200).json({
@@ -546,7 +593,8 @@ exports.orders_get_order = (req, res, next) => {
                     ryona: order.ryona,
                     products: order.products.sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                     rullakot: order.rullakot,
-                    hyllyt: order.hyllyt
+                    hyllyt: order.hyllyt,
+                    rekka: order.rekka
                 })
             }
         })
