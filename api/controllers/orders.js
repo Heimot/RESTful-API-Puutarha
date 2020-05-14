@@ -480,7 +480,8 @@ exports.orders_get_calendar = (req, res, next) => {
                             tuusjarvi: doc.tuusjarvi,
                             ryona: doc.ryona,
                             rullakot: doc.rullakot,
-                            rekka: doc.rekka
+                            rekka: doc.rekka,
+                            position: doc.position
                         }
                     })
                 });
@@ -498,7 +499,8 @@ exports.orders_get_calendar = (req, res, next) => {
                             tuusjarvi: doc.tuusjarvi,
                             ryona: doc.ryona,
                             rullakot: doc.rullakot,
-                            rekka: doc.rekka
+                            rekka: doc.rekka,
+                            position: doc.position
                         }
                     })
 
