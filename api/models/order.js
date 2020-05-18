@@ -9,6 +9,7 @@ const orderSchema = mongoose.Schema({
     toimituspvm: { type: String, required: true },
     tuusjarvi: { type: String, required: true, default: "Ei" },
     ryona: { type: String, required: true, default: "Ei" },
+    orderLisatieto: { type: String, required: false },
 
     products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: false }],
 
@@ -17,7 +18,9 @@ const orderSchema = mongoose.Schema({
 
     rekka: { type: String, required: true, default: "Ei valittu" },
 
-    position: { type: Number, required: true, default: 0 }
+    position: { type: Number, required: true, default: 0 },
+
+    keraysPosition: { type: Number, required: true, default: 0 }
 });
 
 module.exports = mongoose.model('Order', orderSchema);
