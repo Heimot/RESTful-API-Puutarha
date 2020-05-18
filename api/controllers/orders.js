@@ -50,7 +50,8 @@ exports.orders_get_date = (req, res, next) => {
                             }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                             rullakot: doc.rullakot,
                             hyllyt: doc.hyllyt,
-                            rekka: doc.rekka
+                            rekka: doc.rekka,
+                            orderLisatieto: doc.orderLisatieto,
                         }
                     })
 
@@ -68,7 +69,8 @@ exports.orders_get_date = (req, res, next) => {
                                 products: doc.products.sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                 rullakot: doc.rullakot,
                                 hyllyt: doc.hyllyt,
-                                rekka: doc.rekka
+                                rekka: doc.rekka,
+                                orderLisatieto: doc.orderLisatieto,
                             }
                         })
                         if (kauppa === "") {
@@ -87,7 +89,8 @@ exports.orders_get_date = (req, res, next) => {
                                             products: doc.products.sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                             rullakot: doc.rullakot,
                                             hyllyt: doc.hyllyt,
-                                            rekka: doc.rekka
+                                            rekka: doc.rekka,
+                                            orderLisatieto: doc.orderLisatieto,
                                         }
                                     })
                                 })
@@ -108,7 +111,8 @@ exports.orders_get_date = (req, res, next) => {
                                                 }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                                 rullakot: doc.rullakot,
                                                 hyllyt: doc.hyllyt,
-                                                rekka: doc.rekka
+                                                rekka: doc.rekka,
+                                                orderLisatieto: doc.orderLisatieto,
                                             }
                                         })
                                     })
@@ -133,7 +137,8 @@ exports.orders_get_date = (req, res, next) => {
                                                 products: doc.products.sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                                 rullakot: doc.rullakot,
                                                 hyllyt: doc.hyllyt,
-                                                rekka: doc.rekka
+                                                rekka: doc.rekka,
+                                                orderLisatieto: doc.orderLisatieto,
                                             }
                                         })
                                     })
@@ -154,7 +159,8 @@ exports.orders_get_date = (req, res, next) => {
                                                     }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                                     rullakot: doc.rullakot,
                                                     hyllyt: doc.hyllyt,
-                                                    rekka: doc.rekka
+                                                    rekka: doc.rekka,
+                                                    orderLisatieto: doc.orderLisatieto,
                                                 }
                                             })
                                         })
@@ -177,7 +183,8 @@ exports.orders_get_date = (req, res, next) => {
                                 }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                 rullakot: doc.rullakot,
                                 hyllyt: doc.hyllyt,
-                                rekka: doc.rekka
+                                rekka: doc.rekka,
+                                orderLisatieto: doc.orderLisatieto,
                             }
                         })
                         if (kauppa === "") {
@@ -196,7 +203,8 @@ exports.orders_get_date = (req, res, next) => {
                                             products: doc.products.sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                             rullakot: doc.rullakot,
                                             hyllyt: doc.hyllyt,
-                                            rekka: doc.rekka
+                                            rekka: doc.rekka,
+                                            orderLisatieto: doc.orderLisatieto,
                                         }
                                     })
                                 })
@@ -217,7 +225,8 @@ exports.orders_get_date = (req, res, next) => {
                                                 }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                                 rullakot: doc.rullakot,
                                                 hyllyt: doc.hyllyt,
-                                                rekka: doc.rekka
+                                                rekka: doc.rekka,
+                                                orderLisatieto: doc.orderLisatieto,
                                             }
                                         })
                                     })
@@ -242,7 +251,8 @@ exports.orders_get_date = (req, res, next) => {
                                                 products: doc.products.sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                                 rullakot: doc.rullakot,
                                                 hyllyt: doc.hyllyt,
-                                                rekka: doc.rekka
+                                                rekka: doc.rekka,
+                                                orderLisatieto: doc.orderLisatieto,
                                             }
                                         })
                                     })
@@ -263,7 +273,8 @@ exports.orders_get_date = (req, res, next) => {
                                                     }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                                     rullakot: doc.rullakot,
                                                     hyllyt: doc.hyllyt,
-                                                    rekka: doc.rekka
+                                                    rekka: doc.rekka,
+                                                    orderLisatieto: doc.orderLisatieto,
                                                 }
                                             })
                                         })
@@ -289,7 +300,8 @@ exports.orders_get_date = (req, res, next) => {
                                     products: doc.products.sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                     rullakot: doc.rullakot,
                                     hyllyt: doc.hyllyt,
-                                    rekka: doc.rekka
+                                    rekka: doc.rekka,
+                                    orderLisatieto: doc.orderLisatieto,
                                 }
                             })
                         });
@@ -309,7 +321,8 @@ exports.orders_get_date = (req, res, next) => {
                                     }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                     rullakot: doc.rullakot,
                                     hyllyt: doc.hyllyt,
-                                    rekka: doc.rekka
+                                    rekka: doc.rekka,
+                                    orderLisatieto: doc.orderLisatieto,
                                 }
                             })
                         });
@@ -331,7 +344,8 @@ exports.orders_get_date = (req, res, next) => {
                             }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                             rullakot: doc.rullakot,
                             hyllyt: doc.hyllyt,
-                            rekka: doc.rekka
+                            rekka: doc.rekka,
+                            orderLisatieto: doc.orderLisatieto,
                         }
                     })
                     if (kerays === "") {
@@ -348,7 +362,8 @@ exports.orders_get_date = (req, res, next) => {
                                     products: doc.products.sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                     rullakot: doc.rullakot,
                                     hyllyt: doc.hyllyt,
-                                    rekka: doc.rekka
+                                    rekka: doc.rekka,
+                                    orderLisatieto: doc.orderLisatieto,
                                 }
                             })
                         });
@@ -368,7 +383,8 @@ exports.orders_get_date = (req, res, next) => {
                                     }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                     rullakot: doc.rullakot,
                                     hyllyt: doc.hyllyt,
-                                    rekka: doc.rekka
+                                    rekka: doc.rekka,
+                                    orderLisatieto: doc.orderLisatieto,
                                 }
                             })
                         });
@@ -389,7 +405,8 @@ exports.orders_get_date = (req, res, next) => {
                                 }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                                 rullakot: doc.rullakot,
                                 hyllyt: doc.hyllyt,
-                                rekka: doc.rekka
+                                rekka: doc.rekka,
+                                orderLisatieto: doc.orderLisatieto,
                             }
                         })
                     });
@@ -423,7 +440,8 @@ exports.orders_create_order = (req, res, next) => {
                 products: req.body.products,
                 rullakot: req.body.rullakot,
                 hyllyt: req.body.hyllyt,
-                rekka: req.body.rekka
+                rekka: req.body.rekka,
+                orderLisatieto: req.body.orderLisatieto,
             });
             return order
                 .save()
@@ -442,7 +460,8 @@ exports.orders_create_order = (req, res, next) => {
                     products: result.products,
                     rullakot: result.rullakot,
                     hyllyt: result.hyllyt,
-                    rekka: result.rekka
+                    rekka: result.rekka,
+                    orderLisatieto: result.orderLisatieto,
                 },
                 request: {
                     type: 'GET',
@@ -503,7 +522,8 @@ exports.orders_get_calendar = (req, res, next) => {
                             ryona: doc.ryona,
                             rullakot: doc.rullakot,
                             rekka: doc.rekka,
-                            position: doc.position
+                            position: doc.position,
+                            keraysPosition: doc.keraysPosition,
                         }
                     })
                 });
@@ -522,7 +542,8 @@ exports.orders_get_calendar = (req, res, next) => {
                             ryona: doc.ryona,
                             rullakot: doc.rullakot,
                             rekka: doc.rekka,
-                            position: doc.position
+                            position: doc.position,
+                            keraysPosition: doc.keraysPosition,
                         }
                     })
 
@@ -566,7 +587,8 @@ exports.orders_get_order = (req, res, next) => {
                     }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                     rullakot: order.rullakot,
                     hyllyt: order.hyllyt,
-                    rekka: order.rekka
+                    rekka: order.rekka,
+                    orderLisatieto: order.orderLisatieto,
                 })
             } else if (paikka && valmius && kukka) {
                 res.status(200).json({
@@ -586,7 +608,8 @@ exports.orders_get_order = (req, res, next) => {
                     }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                     rullakot: order.rullakot,
                     hyllyt: order.hyllyt,
-                    rekka: order.rekka
+                    rekka: order.rekka,
+                    orderLisatieto: order.orderLisatieto,
                 })
             } else if (paikka === "" && valmius && kukka) {
                 res.status(200).json({
@@ -604,7 +627,8 @@ exports.orders_get_order = (req, res, next) => {
                     }).sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                     rullakot: order.rullakot,
                     hyllyt: order.hyllyt,
-                    rekka: order.rekka
+                    rekka: order.rekka,
+                    orderLisatieto: order.orderLisatieto,
                 })
             } else {
                 res.status(200).json({
@@ -618,7 +642,8 @@ exports.orders_get_order = (req, res, next) => {
                     products: order.products.sort((a, b) => { return a.kukka.localeCompare(b.kukka) }),
                     rullakot: order.rullakot,
                     hyllyt: order.hyllyt,
-                    rekka: order.rekka
+                    rekka: order.rekka,
+                    orderLisatieto: order.orderLisatieto,
                 })
             }
         })
