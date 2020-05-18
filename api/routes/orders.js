@@ -11,6 +11,8 @@ router.get('/tables', checkAuth, ordersController.orders_get_date);
 
 router.get('/get/calendar', checkAuth, ordersController.orders_get_calendar);
 
+router.get('/get/all/ids/:orderId', checkAuth, ordersController.orders_get_ids_to_remove);
+
 router.post('/post/', checkAuth, ordersController.orders_create_order);
 
 router.get('/get/id/:orderId', checkAuth, ordersController.orders_get_order);

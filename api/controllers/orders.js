@@ -458,6 +458,28 @@ exports.orders_create_order = (req, res, next) => {
         });
 }
 
+exports.orders_get_ids_to_remove = (req, res, next) => {
+    Order.findById(req.params.orderId)
+        .exec()
+        .then(docs => {
+            if (!docs) {
+                res.status(404).json({
+                    message: "Order not found"
+                })
+            }
+            res.status(200).json({
+                _id: docs._id,
+                products: docs.products
+            })
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+}
+
 exports.orders_get_calendar = (req, res, next) => {
     const date = req.query.date;
     const toimituspvm = req.query.toimitus;

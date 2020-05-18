@@ -26,6 +26,8 @@ module.exports = (req, res, next) => {
                 return url === req.originalUrl.split("?")[0];
             } else if (req.originalUrl.includes("/orders/get/calendar")) {
                 return url === req.originalUrl.split('?')[0];
+            } else if(req.originalUrl.includes('/orders/get/all/ids/')) {
+                return url === req.originalUrl.substring(0, req.originalUrl.indexOf("/ids/")) + "/ids/";
             } else {
 
                 return url === req.originalUrl
