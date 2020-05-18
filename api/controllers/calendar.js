@@ -19,6 +19,7 @@ exports.calendar_post_data = (req, res, next) => {
     const calendar = new Calendar({
         _id: req.body._id,
         info: req.body.info,
+        keraysInfo: req.body.keraysInfo,
     });
     
     calendar
@@ -30,6 +31,7 @@ exports.calendar_post_data = (req, res, next) => {
                 createdInfo: {
                     _id: result._id,
                     info: result.info,
+                    keraysInfo: result.keraysInfo,
                 }
             });
         })
@@ -78,7 +80,7 @@ exports.calendar_update_data = (req, res, next) => {
 exports.calendar_get_data_by_id = (req, res, next) => {
     const id = req.params.calendarId;
     Calendar.findById(id)
-    .select('_id info')
+    .select('_id info keraysInfo')
     .exec()
     .then(doc => {
         if (doc) {
