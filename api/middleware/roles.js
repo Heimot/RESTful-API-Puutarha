@@ -1,6 +1,6 @@
 module.exports = {
     User: ["/products/", "/products/patch/id/", "/products/get/id/",
-        "/orders/", "/orders/tables", "/orders/get/id/"
+        "/orders/", "/orders/tables", "/orders/get/id/", "/orders/get/calendar",
     ],
 
     Admin: [
@@ -17,6 +17,7 @@ module.exports = {
     Kuski: [
         "/palautetut/get", "/palautetut/post", "/palautetut/put/id/", "/palautetut/patch/id/",
         "/rullakot/get", "/rullakot/post",
-        "/hyllyt/get", "/hyllyt/post"
+        "/hyllyt/get", "/hyllyt/post",
+        "/orders/get/calendar",
     ]
 }
