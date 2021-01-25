@@ -26,7 +26,8 @@ const calendarRoutes = require('./api/routes/calendar');
 app.use(compression());
 app.use(express.static('public'));
 // SERVERmongoose.connect('mongodb://'+ process.env.USER +':' + process.env.MONGOPW + '@' + process.env.DNS_SERVER,
-mongoose.connect('mongodb+srv://Heimot:' + process.env.DEV + '@node-rest-api-8ybrw.mongodb.net/test?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://Heimot:' + process.env.DEV + '@cluster0.8ybrw.mongodb.net/Cluster0?retryWrites=true&w=majority',
+    //mongoose.connect('mongodb://'+ process.env.USER +':' + process.env.MONGOPW + '@' + process.env.DNS_SERVER,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -36,14 +37,20 @@ mongoose.Promise = global.Promise;
 
 ///////////////////////////
 
-var io = socket(server);
+var io = socket(server, {
+    cors: {
+        origin: ["http://localhost:3001", "http://localhost:3000"],
+        methods: ["GET"]
+    }
+});
 
 io.use(socketioJwt.authorize({
     secret: process.env.JWT_KEY,
     handshake: true
-  }));
+}));
 
 io.on('connection', function (socket) {
+    console.log(socket.id)
     socket.on('chat', function (data) {
         io.sockets.emit('chat', data);
     });
