@@ -169,6 +169,7 @@ exports.products_update_product_patch = (req, res, next) => {
         });
 }
 
+// ADD IDS TO ARRAY AND .map() them and THEN DELETE THEM!
 exports.products_delete_product = (req, res, next) => {
     const id = req.params.productId;
     Product.remove({ _id: id })
