@@ -704,7 +704,7 @@ exports.orders_delete_order = (req, res, next) => {
             res.status(200).json({
                 message: 'Order deleted',
                 request: {
-                    type: 'POST',
+                    type: 'DELETE',
                     url: 'http:localhost:3000/orders/',
                     body: { productId: 'ID', quantity: 'Number' }
                 }
