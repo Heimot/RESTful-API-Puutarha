@@ -1,9 +1,16 @@
-
+require('dotenv').config();
+const mongo = require('mongoose');
+var db = mongo.connect('mongodb+srv://admin2:' + process.env.DEV + '@cluster0.8ybrw.mongodb.net/Cluster0?retryWrites=true&w=majority')
 
 var log_conf = {
   transport: function(data) {
     console.log(data.output)
-
+    var loginfo = db.collection('loginfo')
+    loginfo.insert(data, function(err, log) {
+      if (err) {
+        console.error(err)
+      }
+    })
   }
 }
 
