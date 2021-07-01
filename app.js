@@ -22,6 +22,7 @@ const rullakkoRoutes = require('./api/routes/rullakot');
 const hyllyRoutes = require('./api/routes/hyllyt');
 const palautetutRoutes = require('./api/routes/palautetut');
 const calendarRoutes = require('./api/routes/calendar');
+const deliveryRoutes = require('./api/routes/delivery');
 
 app.use(compression());
 app.use(express.static('public'));
@@ -82,6 +83,7 @@ app.use('/rullakot', rullakkoRoutes);
 app.use('/hyllyt', hyllyRoutes);
 app.use('/palautetut', palautetutRoutes);
 app.use('/calendar', calendarRoutes);
+app.use('/delivery', deliveryRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
