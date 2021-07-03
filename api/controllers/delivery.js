@@ -3,6 +3,7 @@ const Delivery = require("../models/delivery.js");
 
 exports.delivery_get_all = (req, res, next) => {
   Delivery.findOne({isUsed: false})
+    .select('_id deliveryId isUsed dateUsed')
     .exec()
     .then((docs) => {
       res.status(200).json(docs);
@@ -41,7 +42,7 @@ exports.delivery_create_delivery = (req, res, next) => {
     });
 };
 
-exports.get_delivery_by_id = (req, res, next) => {
+exports.patch_delivery_by_id = (req, res, next) => {
     const id = req.params.deliveryId;
     const updateOps = {};
     for (const ops of req.body) {

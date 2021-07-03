@@ -11,7 +11,8 @@ module.exports = {
         "/rullakot/get", "/rullakot/post", "/rullakot/get/id/", "/rullakot/put/id/", "/rullakot/patch/id/", "/rullakot/delete/id/",
         "/hyllyt/get", "/hyllyt/post", "/hyllyt/get/id/", "/hyllyt/put/id/", "/hyllyt/patch/id/", "/hyllyt/delete/id/",
         "/palautetut/get", "/palautetut/post", "/palautetut/get/id/", "/palautetut/put/id/", "/palautetut/patch/id/", "/palautetut/delete/id/",
-        "/calendar/", "/calendar/get/id/", "/calendar/post", "/calendar/delete/id/", "/calendar/put/id/", "/calendar/patch/id/"
+        "/calendar/", "/calendar/get/id/", "/calendar/post", "/calendar/delete/id/", "/calendar/put/id/", "/calendar/patch/id/",
+        "/delivery/get/delivery", "/delivery/post/delivery", "/delivery/patch/id/", "/delivery/delete/id/" 
     ],
 
     Kuski: [
